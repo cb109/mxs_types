@@ -189,8 +189,7 @@ struct mxs_dict (
     fn _update_arrays items = (
         /***As sorting is based on items, this function
         empties and rebuilds the _keys and _values arrays.***/
-        this._keys = #()
-        this._values = #()
+        this.clear()
         for i = 1 to items.count do (
             this._keys[i] = items[i][1]
             this._values[i] = items[i][2]
