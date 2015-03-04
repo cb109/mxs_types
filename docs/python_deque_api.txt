@@ -1,0 +1,107 @@
+class deque(__builtin__.object)
+ |  deque(iterable[, maxlen]) --> deque object
+ |
+ |  Build an ordered collection with optimized access from its endpoints.
+ |
+ |  Methods defined here:
+ |
+ |  __copy__(...)
+ |      Return a shallow copy of a deque.
+ |
+ |  __delitem__(...)
+ |      x.__delitem__(y) <==> del x[y]
+ |
+ |  __eq__(...)
+ |      x.__eq__(y) <==> x==y
+ |
+ |  __ge__(...)
+ |      x.__ge__(y) <==> x>=y
+ |
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |
+ |  __getitem__(...)
+ |      x.__getitem__(y) <==> x[y]
+ |
+ |  __gt__(...)
+ |      x.__gt__(y) <==> x>y
+ |
+ |  __iadd__(...)
+ |      x.__iadd__(y) <==> x+=y
+ |
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see help(type(x)) for signature
+ |
+ |  __iter__(...)
+ |      x.__iter__() <==> iter(x)
+ |
+ |  __le__(...)
+ |      x.__le__(y) <==> x<=y
+ |
+ |  __len__(...)
+ |      x.__len__() <==> len(x)
+ |
+ |  __lt__(...)
+ |      x.__lt__(y) <==> x<y
+ |
+ |  __ne__(...)
+ |      x.__ne__(y) <==> x!=y
+ |
+ |  __reduce__(...)
+ |      Return state information for pickling.
+ |
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |
+ |  __reversed__(...)
+ |      D.__reversed__() -- return a reverse iterator over the deque
+ |
+ |  __setitem__(...)
+ |      x.__setitem__(i, y) <==> x[i]=y
+ |
+ |  append(...)
+ |      Add an element to the right side of the deque.
+ |
+ |  appendleft(...)
+ |      Add an element to the left side of the deque.
+ |
+ |  clear(...)
+ |      Remove all elements from the deque.
+ |
+ |  count(...)
+ |      D.count(value) -> integer -- return number of occurrences of value
+ |
+ |  extend(...)
+ |      Extend the right side of the deque with elements from the iterable
+ |
+ |  extendleft(...)
+ |      Extend the left side of the deque with elements from the iterable
+ |
+ |  pop(...)
+ |      Remove and return the rightmost element.
+ |
+ |  popleft(...)
+ |      Remove and return the leftmost element.
+ |
+ |  remove(...)
+ |      D.remove(value) -- remove first occurrence of value.
+ |
+ |  reverse(...)
+ |      D.reverse() -- reverse *IN PLACE*
+ |
+ |  rotate(...)
+ |      Rotate the deque n steps to the right (default n=1).  If n is negative, rotates left.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  maxlen
+ |      maximum size of a deque or None if unbounded
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __hash__ = None
+ |
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
