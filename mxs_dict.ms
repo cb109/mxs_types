@@ -227,3 +227,135 @@ struct mxs_dict (
         )
     )
 )
+
+
+struct mxs_defaultdict (
+    /***Similar to the collections.defaultdict in Python, this
+    dict gets a factory function as its first argument to create
+    and add values for unknown keys on the fly.
+
+    The rest of the API works exactly as the mxs_dict.
+
+    Example:
+
+    fn list = #()
+    d = mxs_defaultdict list
+    append (d.get "foo") 123
+    append (d.get "foo") 456
+    append (d.get "foo") 789
+    d.get "foo"
+    >>> #(123, 456, 789)
+
+    ***/
+    public
+    default_factory,
+
+    -- Initial values setup in event handler below.
+    _keys,
+    _values,
+
+    private
+    _dict,
+
+    public
+    fn fromkeys keys default:undefined = (
+        this._dict.fromkeys keys default:default
+    ),
+
+
+    public
+    fn has_key key = (
+        this._dict.has_key key
+    ),
+
+    public
+    fn add key val = (
+        this._dict.add key val
+    ),
+
+    public
+    fn set_ key val = (
+        this._dict.set_ key val
+    ),
+
+    public
+    fn get key  = (
+        /***Unknown keys will trigger insertion of
+        the value returned by default_factory.***/
+        if not this._dict.has_key key and \
+                this.default_factory != undefined do (
+            local val = this.default_factory()
+            this.add key val
+            return val
+        )
+
+        this._dict.get key
+    ),
+
+    public
+    fn keys = (
+        this._dict.keys()
+    ),
+
+    public
+    fn values = (
+        this._dict.values()
+    ),
+
+    public
+    fn items = (
+        this._dict.items()
+    ),
+
+    public
+    fn clear = (
+        this._dict.clear()
+    ),
+
+    public
+    fn copy = (
+        this._dict.copy()
+    ),
+
+    public
+    fn pop key default: = (
+        this._dict.pop()
+    ),
+
+    public
+    fn popitem = (
+        this._dict.popitem()
+    ),
+
+    public
+    fn update dict_ = (
+        this._dict.update()
+    ),
+
+    private
+    fn _sort_by item1 item2 item_index:1 reversed:False = (
+        this._dict._sort_by item1 item2 \
+            item_index:item_index reversed:reversed
+    ),
+
+    private
+    fn _update_arrays items = (
+        this._dict._update_arrays items
+    ),
+
+    public
+    fn sort_by_key reversed:False = (
+        this._dict.sort_by_key reversed:reversed
+    ),
+
+    public
+    fn sort_by_value reversed:False = (
+        this._dict.sort_by_value reversed:reversed
+    ),
+
+    on create do (
+        this._dict = mxs_dict()
+        this._keys = this._dict._keys
+        this._values = this._dict._values
+    )
+)
