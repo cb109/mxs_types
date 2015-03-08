@@ -282,8 +282,8 @@ struct mxs_defaultdict (
     fn get key  = (
         /***Unknown keys will trigger insertion of
         the value returned by default_factory.***/
-        if not this._dict.has_key key and \
-                this.default_factory != undefined do (
+        if not this.default_factory != undefined and \
+                this._dict.has_key key do (
             local val = this.default_factory()
             this.add key val
             return val
