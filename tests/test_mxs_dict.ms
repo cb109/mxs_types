@@ -1,4 +1,5 @@
-fileIn "mxs_dict.ms"
+test_dir = getFilenamePath (getSourceFileName())
+fileIn (pathConfig.appendPath test_dir @"..\mxs_dict.ms")
 
 
 fn test_fromkeys = (
