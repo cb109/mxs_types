@@ -15,7 +15,6 @@ struct mxs_dict (
     February 2015, www.cbuelter.de
 
     ***/
-
     public  -- Public for tests and convenience.
     _keys = #(),
     _values = #(),
