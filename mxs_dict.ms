@@ -22,7 +22,7 @@ THE SOFTWARE.***/
 
 
 struct mxs_dict (
-    /***Simple implementation of a dictionary using lists.
+    /***Represents a mapping of keys to values.
 
     Anything can be used as a key or value, e.g. scene objects,
     materials, color values or controllers, making it very versatile.
@@ -30,9 +30,10 @@ struct mxs_dict (
     Supports sorting by key/value if keys/values are all of the
     same comparable type (e.g. all strings or numbers).
 
-    The interface is loosely based on Python's dict API.
     Note: This is not a 'real' hash table, just parallel arrays,
     resulting in low performance when used with many items.
+
+    The interface is loosely based on Python's dict API.
 
     ***/
 
