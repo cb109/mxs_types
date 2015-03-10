@@ -1,6 +1,3 @@
--- TODO maybe allow both arrays and sets as input?
--- make array a set before actual use?
-
 struct mxs_set (
     /***
 
@@ -66,7 +63,7 @@ struct mxs_set (
 
     public
     fn difference set_ = (
-        /***Return the difference of this set and a new set.
+        /***Return the difference of this set and another as a new set.
         (i.e. all elements that are in this set but not the other.)***/
         local differing = #()
         for element_1 in this.elements() do (
@@ -78,18 +75,19 @@ struct mxs_set (
             if not found do
                 append differing element_1
         )
-        differing
+        mxs_set differing
     ),
 
     public
     fn difference_update set_ = (
         /***Remove all elements of another set from this set.***/
-        this._elements = this.difference set_
+        local diff_set = this.difference set_
+        this._elements = diff_set.elements()
     ),
 
     public
     fn intersection set_ = (
-        /***Return the intersection of this set and a new set.
+        /***Return the intersection of this set and another as a new set.
         (i.e. elements that are common to both sets.)***/
         local intersecting = #()
         for element_1 in this.elements() do (
@@ -101,20 +99,21 @@ struct mxs_set (
             if found do
                 append intersecting element_1
         )
-        intersecting
+        mxs_set intersecting
     ),
 
     public
     fn intersection_update set_ = (
         /***Update a set with the intersection of itself and another.***/
-        this._elements = this.intersection set_
+        local intersect_set = this.intersection set_
+        this._elements = intersection_set.elements()
     ),
 
     public
     fn isdisjoint set_ = (
         /***Return true if two sets have a null intersection.***/
-        local intersecting = this.intersection set_
-        intersecting.count == 0
+        local intersect_set = this.intersection set_
+        (intersect_set.elements()).count == 0
     ),
 
     public
@@ -161,37 +160,52 @@ struct mxs_set (
         undefined
     ),
 
+    private
+    fn _is_in array_ item_ = (
+        local idx = findItem array_ item_
+        idx != 0
+    ),
+
     public
     fn symmetric_difference set_ = (
         /***Return the symmetric difference of two sets as a new set.
         (i.e. all elements that are in exactly one of the sets.)***/
+        local only_in_this = #()
+        for element_1 in this.elements() do (
+            if not this._is_in set_ element_1 do
+                append only_in_this element_1
+        )
 
+        local only_in_that = #()
+        for element_2 in set_.elements() do (
+            if not this._is_in this element_2 do
+                append only_in_that element_2
+        )
+        local symmetric = only_in_this + only_in_that
+        mxs_set symmetric
     ),
 
     public
     fn symmetric_difference_update set_ = (
         /***Update a set with the symmetric
         difference of itself and another.***/
-
-    ),
-
-    private
-    fn _get_union_elements set_ = (
-        makeUniqueArray (this.elements() + set_.elements())
+        local symmetric_set = this.symmetric_difference set_
+        this._elements = symmetric_set.elements()
     ),
 
     public
     fn union set_ = (
         /***Return the union of sets as a new set.
         (i.e. all elements that are in either set.)***/
-        local united = this._get_union_elements set_
+        local united = this.elements() + set_.elements()
         mxs_set united
     ),
 
     public
     fn update set_ = (
         /***Update a set with the union of itself and another.***/
-        this._elements = this._get_union_elements set_
+        local union_set = this.union set_
+        this._elements = union_set.elements()
     ),
 
     public
