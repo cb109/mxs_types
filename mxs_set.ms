@@ -34,10 +34,7 @@ struct mxs_set (
     public
     fn add element = (
         /***Add an element to a set.
-
-        This has no effect if the element is already present.
-
-        ***/
+        This has no effect if the element is already present.***/
         appendIfUnique this._elements element
     ),
 
@@ -69,8 +66,8 @@ struct mxs_set (
 
     public
     fn difference set_ = (
-        /***Return the difference of two or more sets as a new set.
-        (i.e. all elements that are in this set but not the others.)***/
+        /***Return the difference of this set and a new set.
+        (i.e. all elements that are in this set but not the other.)***/
         local differing = #()
         for element_1 in this.elements() do (
             local found = false
@@ -92,8 +89,8 @@ struct mxs_set (
 
     public
     fn intersection set_ = (
-        /***Return the intersection of two or more sets as a new set.
-        (i.e. elements that are common to all of the sets.)***/
+        /***Return the intersection of this set and a new set.
+        (i.e. elements that are common to both sets.)***/
         local intersecting = #()
         for element_1 in this.elements() do (
             local found = false
@@ -115,7 +112,7 @@ struct mxs_set (
 
     public
     fn isdisjoint set_ = (
-        /***Return True if two sets have a null intersection.***/
+        /***Return true if two sets have a null intersection.***/
         local intersecting = this.intersection set_
         intersecting.count == 0
     ),
@@ -153,7 +150,7 @@ struct mxs_set (
     public
     fn pop = (
         /***Remove and return an arbitrary set element.
-        Raises KeyError if the set is empty.***/
+        Return undefined if the set is empty.***/
         local count_ = this._elements.count
         if count_ > 0 do (
             local idx = random 1 count_
@@ -193,24 +190,26 @@ struct mxs_set (
 
     public
     fn update set_ = (
-        /***Update a set with the union of itself and others.***/
+        /***Update a set with the union of itself and another.***/
         this._elements = this._get_union_elements set_
     ),
 
     public
     fn update_from_array array_ = (
-        /***Update a set with the union of itself and others.***/
+        /***Update a set with the union of itself and a new set
+        (which is created based on the given array).***/
         local set_ = mxs_set array_
         this.update set_
     ),
 
     public
     fn to_array = (
+        /***Return the set content as an array.***/
         this._elements
     ),
 
     on create do (
-        -- Handle array as first argument of constructor.
+        -- Handle array as optional first argument of constructor.
         if this._elements != undefined do
             this._elements = makeUniqueArray this._elements
     )
