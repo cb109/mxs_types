@@ -201,22 +201,68 @@ fn test_intersection_update = (
 
 
 fn test_isdisjoint = (
+    local a_set = mxs_set #(1, 1, 2, 2)
+    local b_set = mxs_set #(3, 3, 4, 4)
 
+    local is_disjoint = a_set.isdisjoint a_set
+    assert (not is_disjoint) options:#(#listener, #dialog) showstack:true
+
+    local is_disjoint = b_set.isdisjoint b_set
+    assert (not is_disjoint) options:#(#listener, #dialog) showstack:true
+
+    local is_disjoint = a_set.isdisjoint b_set
+    assert (is_disjoint) options:#(#listener, #dialog) showstack:true
+
+    local is_disjoint = b_set.isdisjoint a_set
+    assert (is_disjoint) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_issubset = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3)
 
+    local is_subset = a_set.issubset a_set
+    assert (is_subset) options:#(#listener, #dialog) showstack:true
+
+    local is_subset = b_set.issubset b_set
+    assert (is_subset) options:#(#listener, #dialog) showstack:true
+
+    local is_subset = a_set.issubset b_set
+    assert (not is_subset) options:#(#listener, #dialog) showstack:true
+
+    local is_subset = b_set.issubset a_set
+    assert (is_subset) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_issuperset = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3)
 
+    local is_superset = a_set.issuperset a_set
+    assert (is_superset) options:#(#listener, #dialog) showstack:true
+
+    local is_superset = b_set.issuperset b_set
+    assert (is_superset) options:#(#listener, #dialog) showstack:true
+
+    local is_superset = a_set.issuperset b_set
+    assert (is_superset) options:#(#listener, #dialog) showstack:true
+
+    local is_superset = b_set.issuperset a_set
+    assert (not is_superset) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_pop = (
+    local new_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    assert (classof (new_set.pop()) == Integer) options:#(#listener, #dialog) showstack:true
+    assert (classof (new_set.pop()) == Integer) options:#(#listener, #dialog) showstack:true
+    assert (classof (new_set.pop()) == Integer) options:#(#listener, #dialog) showstack:true
+    assert (new_set.pop() == undefined) options:#(#listener, #dialog) showstack:true
 
+    local elements = new_set.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
 )
 
 
