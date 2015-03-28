@@ -146,7 +146,7 @@ struct mxs_set (
     fn intersection_update set_ = (
         /***Update a set with the intersection of itself and another.***/
         local intersect_set = this.intersection set_
-        this._elements = intersection_set.elements()
+        this._elements = intersect_set.elements()
     ),
 
     public
