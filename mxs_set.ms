@@ -60,15 +60,19 @@ struct mxs_set (
     ),
 
     public
-    fn set_elements elements_ = (
-        this._elements = elements_
-    ),
-
-    public
     fn add element = (
         /***Add an element to a set.
         This has no effect if the element is already present.***/
         appendIfUnique this._elements element
+    ),
+
+    public
+    fn set_elements elements_ = (
+        /***Set elements from given list.
+        Elements will only contain unique items afterwards.***/
+        this._elements = #()
+        for element in elements_ do
+            this.add element
     ),
 
     private
