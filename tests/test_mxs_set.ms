@@ -3,32 +3,80 @@ fileIn (pathConfig.appendPath test_dir @"..\mxs_set.ms")
 
 
 fn test_from_array = (
+    local arr = #(1, 1, 2, 3, 5, 5)
+    local new_set = mxs_set.from_array arr
+    assert (classof new_set == mxs_set) options:#(#listener, #dialog) showstack:true
 
+    local elements = new_set.elements()
+    assert (elements.count == 4) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[4] == 5) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_elements = (
-
+    local new_set = mxs_set #(1, 2, 2, 3, 3)
+    local elements = new_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_set_elements = (
-
+    local new_set = mxs_set()
+    new_set.set_elements #(1, 2, 2, 3, 3)
+    local elements = new_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_discard = (
+    local new_set = mxs_set #(1, 2, 2, 3, 3)
 
+    new_set.discard 2
+    local elements = new_set.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
+
+    new_set.discard 5
+    local elements = new_set.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_clear = (
+    local new_set = mxs_set #(1, 2, 2, 3, 3)
+    local elements = new_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
 
+    new_set.clear()
+    local elements = new_set.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_copy = (
+    local new_set = mxs_set #(1, 2, 2, 3, 3)
+    local elements = new_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
 
+    local copied_set = new_set.copy()
+    local copied_elements = copied_set.elements()
+    assert (copied_elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (copied_elements[1] == elements[1]) options:#(#listener, #dialog) showstack:true
+    assert (copied_elements[2] == elements[2]) options:#(#listener, #dialog) showstack:true
+    assert (copied_elements[3] == elements[3]) options:#(#listener, #dialog) showstack:true
 )
 
 
