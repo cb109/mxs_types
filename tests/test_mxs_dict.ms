@@ -7,14 +7,14 @@ fn test_fromkeys = (
     local keys = d.keys()
     local values = d.values()
 
-    assert (keys.count == 2) options:#(#dialog)
-    assert (values.count == 2) options:#(#dialog)
+    assert (keys.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (values.count == 2) options:#(#listener, #dialog) showstack:true
 
-    assert (keys[1] == "foo") options:#(#dialog)
-    assert (keys[2] == "bar") options:#(#dialog)
+    assert (keys[1] == "foo") options:#(#listener, #dialog) showstack:true
+    assert (keys[2] == "bar") options:#(#listener, #dialog) showstack:true
 
-    assert (classof values[1] == Array) options:#(#dialog)
-    assert (classof values[2] == Array) options:#(#dialog)
+    assert (classof values[1] == Array) options:#(#listener, #dialog) showstack:true
+    assert (classof values[2] == Array) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -23,82 +23,82 @@ fn test_has_key = (
     d.add "foo" 123
 
     local key_exists = d.has_key "foo"
-    assert key_exists options:#(#dialog)
+    assert key_exists options:#(#listener, #dialog) showstack:true
 
     local key_exists = d.has_key "bar"
-    assert (not key_exists) options:#(#dialog)
+    assert (not key_exists) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_get = (
     local d = mxs_dict()
-    assert (d.get "nope" == undefined) options:#(#dialog)
-    assert (d.get "nope" default:123 == 123) options:#(#dialog)
+    assert (d.get "nope" == undefined) options:#(#listener, #dialog) showstack:true
+    assert (d.get "nope" default:123 == 123) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 567
-    assert (d.get "foo" == 567) options:#(#dialog)
+    assert (d.get "foo" == 567) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_keys = (
     local d = mxs_dict()
     local keys = d.keys()
-    assert (keys.count == 0) options:#(#dialog)
+    assert (keys.count == 0) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 123
     d.add "bar" 567
 
     keys = d.keys()
-    assert (keys.count == 2) options:#(#dialog)
-    assert (keys[1] == "foo") options:#(#dialog)
-    assert (keys[2] == "bar") options:#(#dialog)
+    assert (keys.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (keys[1] == "foo") options:#(#listener, #dialog) showstack:true
+    assert (keys[2] == "bar") options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_values = (
     local d = mxs_dict()
     local values = d.values()
-    assert (values.count == 0) options:#(#dialog)
+    assert (values.count == 0) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 123
     d.add "bar" 567
 
     values = d.values()
-    assert (values.count == 2) options:#(#dialog)
-    assert (values[1] == 123) options:#(#dialog)
-    assert (values[2] == 567) options:#(#dialog)
+    assert (values.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (values[1] == 123) options:#(#listener, #dialog) showstack:true
+    assert (values[2] == 567) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_items = (
     local d = mxs_dict()
     local items = d.items()
-    assert (items.count == 0) options:#(#dialog)
+    assert (items.count == 0) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 123
     d.add "bar" 567
 
     items = d.items()
-    assert (items.count == 2) options:#(#dialog)
-    assert (items[1][1] == "foo") options:#(#dialog)
-    assert (items[2][1] == "bar") options:#(#dialog)
-    assert (items[1][2] == 123) options:#(#dialog)
-    assert (items[2][2] == 567) options:#(#dialog)
+    assert (items.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (items[1][1] == "foo") options:#(#listener, #dialog) showstack:true
+    assert (items[2][1] == "bar") options:#(#listener, #dialog) showstack:true
+    assert (items[1][2] == 123) options:#(#listener, #dialog) showstack:true
+    assert (items[2][2] == 567) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_add = (
     local d = mxs_dict()
     local no_val = d.get "nope"
-    assert (no_val == undefined) options:#(#dialog)
+    assert (no_val == undefined) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" "bar"
     local val = d.get "foo"
-    assert (val == "bar") options:#(#dialog)
+    assert (val == "bar") options:#(#listener, #dialog) showstack:true
 
     d.add "foo" "dingbaz"
     local overwritten = d.get "foo"
-    assert (overwritten == "dingbaz") options:#(#dialog)
+    assert (overwritten == "dingbaz") options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -109,7 +109,7 @@ fn test_clear = (
     d.clear()
 
     local items = d.items()
-    assert (items.count == 0) options:#(#dialog)
+    assert (items.count == 0) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -121,7 +121,7 @@ fn test_copy = (
     d.add "tea" pot
 
     local copied = d.copy()
-    assert (copied != d) options:#(#dialog)
+    assert (copied != d) options:#(#listener, #dialog) showstack:true
 
     local d_items = d.items()
     local copied_items = copied.items()
@@ -131,8 +131,8 @@ fn test_copy = (
         local d_val = d_items[i][2]
         local copied_key = copied_items[i][1]
         local copied_val = copied_items[i][2]
-        assert (d_key == copied_key) options:#(#dialog)
-        assert (d_val == copied_val) options:#(#dialog)
+        assert (d_key == copied_key) options:#(#listener, #dialog) showstack:true
+        assert (d_val == copied_val) options:#(#listener, #dialog) showstack:true
     )
 
     delete pot
@@ -145,13 +145,13 @@ fn test_pop = (
     d.add "bar" 567
 
     local val = d.pop "bar"
-    assert (val == 567) options:#(#dialog)
+    assert (val == 567) options:#(#listener, #dialog) showstack:true
 
     local val = d.pop "foo" default:333
-    assert (val == 333) options:#(#dialog)
+    assert (val == 333) options:#(#listener, #dialog) showstack:true
 
     local val = d.pop "nope"
-    assert (val == undefined) options:#(#dialog)
+    assert (val == undefined) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -161,17 +161,17 @@ fn test_popitem = (
     d.add "bar" 567
 
     local item = d.popitem()
-    assert ((d.items()).count == 1) options:#(#dialog)
-    assert ((item[1] == "foo") or (item[1] == "bar")) options:#(#dialog)
-    assert ((item[2] == 123) or (item[2] == 567)) options:#(#dialog)
+    assert ((d.items()).count == 1) options:#(#listener, #dialog) showstack:true
+    assert ((item[1] == "foo") or (item[1] == "bar")) options:#(#listener, #dialog) showstack:true
+    assert ((item[2] == 123) or (item[2] == 567)) options:#(#listener, #dialog) showstack:true
 
     local item = d.popitem()
-    assert ((d.items()).count == 0) options:#(#dialog)
-    assert ((item[1] == "foo") or (item[1] == "bar")) options:#(#dialog)
-    assert ((item[2] == 123) or (item[2] == 567)) options:#(#dialog)
+    assert ((d.items()).count == 0) options:#(#listener, #dialog) showstack:true
+    assert ((item[1] == "foo") or (item[1] == "bar")) options:#(#listener, #dialog) showstack:true
+    assert ((item[2] == 123) or (item[2] == 567)) options:#(#listener, #dialog) showstack:true
 
     local item = d.popitem()
-    assert (item == undefined) options:#(#dialog)
+    assert (item == undefined) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -187,14 +187,14 @@ fn test_update = (
     d1.update d2
 
     local d1_items = d1.items()
-    assert (d1_items[1][1] == "foo") options:#(#dialog)
-    assert (d1_items[1][2] == 999) options:#(#dialog)
+    assert (d1_items[1][1] == "foo") options:#(#listener, #dialog) showstack:true
+    assert (d1_items[1][2] == 999) options:#(#listener, #dialog) showstack:true
 
-    assert (d1_items[2][1] == "bar") options:#(#dialog)
-    assert (d1_items[2][2] == 567) options:#(#dialog)
+    assert (d1_items[2][1] == "bar") options:#(#listener, #dialog) showstack:true
+    assert (d1_items[2][2] == 567) options:#(#listener, #dialog) showstack:true
 
-    assert (d1_items[3][1] == "test") options:#(#dialog)
-    assert (d1_items[3][2] == 890) options:#(#dialog)
+    assert (d1_items[3][1] == "test") options:#(#listener, #dialog) showstack:true
+    assert (d1_items[3][2] == 890) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -207,25 +207,25 @@ fn test_sort_by_key = (
 
     d.sort_by_key reversed:false
     local items = d.items()
-    assert (items[1][1] == "andreas") options:#(#dialog)
-    assert (items[2][1] == "bernhard") options:#(#dialog)
-    assert (items[3][1] == "thomas") options:#(#dialog)
-    assert (items[4][1] == "zacharias") options:#(#dialog)
-    assert (items[1][2] == 1) options:#(#dialog)
-    assert (items[2][2] == 3) options:#(#dialog)
-    assert (items[3][2] == 2) options:#(#dialog)
-    assert (items[4][2] == 6) options:#(#dialog)
+    assert (items[1][1] == "andreas") options:#(#listener, #dialog) showstack:true
+    assert (items[2][1] == "bernhard") options:#(#listener, #dialog) showstack:true
+    assert (items[3][1] == "thomas") options:#(#listener, #dialog) showstack:true
+    assert (items[4][1] == "zacharias") options:#(#listener, #dialog) showstack:true
+    assert (items[1][2] == 1) options:#(#listener, #dialog) showstack:true
+    assert (items[2][2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (items[3][2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (items[4][2] == 6) options:#(#listener, #dialog) showstack:true
 
     d.sort_by_key reversed:true
     local items = d.items()
-    assert (items[1][1] == "zacharias") options:#(#dialog)
-    assert (items[2][1] == "thomas") options:#(#dialog)
-    assert (items[3][1] == "bernhard") options:#(#dialog)
-    assert (items[4][1] == "andreas") options:#(#dialog)
-    assert (items[1][2] == 6) options:#(#dialog)
-    assert (items[2][2] == 2) options:#(#dialog)
-    assert (items[3][2] == 3) options:#(#dialog)
-    assert (items[4][2] == 1) options:#(#dialog)
+    assert (items[1][1] == "zacharias") options:#(#listener, #dialog) showstack:true
+    assert (items[2][1] == "thomas") options:#(#listener, #dialog) showstack:true
+    assert (items[3][1] == "bernhard") options:#(#listener, #dialog) showstack:true
+    assert (items[4][1] == "andreas") options:#(#listener, #dialog) showstack:true
+    assert (items[1][2] == 6) options:#(#listener, #dialog) showstack:true
+    assert (items[2][2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (items[3][2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (items[4][2] == 1) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -238,25 +238,25 @@ fn test_sort_by_value = (
 
     d.sort_by_value reversed:false
     local items = d.items()
-    assert (items[1][1] == "andreas") options:#(#dialog)
-    assert (items[2][1] == "thomas") options:#(#dialog)
-    assert (items[3][1] == "bernhard") options:#(#dialog)
-    assert (items[4][1] == "zacharias") options:#(#dialog)
-    assert (items[1][2] == 1) options:#(#dialog)
-    assert (items[2][2] == 2) options:#(#dialog)
-    assert (items[3][2] == 3) options:#(#dialog)
-    assert (items[4][2] == 6) options:#(#dialog)
+    assert (items[1][1] == "andreas") options:#(#listener, #dialog) showstack:true
+    assert (items[2][1] == "thomas") options:#(#listener, #dialog) showstack:true
+    assert (items[3][1] == "bernhard") options:#(#listener, #dialog) showstack:true
+    assert (items[4][1] == "zacharias") options:#(#listener, #dialog) showstack:true
+    assert (items[1][2] == 1) options:#(#listener, #dialog) showstack:true
+    assert (items[2][2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (items[3][2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (items[4][2] == 6) options:#(#listener, #dialog) showstack:true
 
     d.sort_by_value reversed:true
     local items = d.items()
-    assert (items[1][1] == "zacharias") options:#(#dialog)
-    assert (items[2][1] == "bernhard") options:#(#dialog)
-    assert (items[3][1] == "thomas") options:#(#dialog)
-    assert (items[4][1] == "andreas") options:#(#dialog)
-    assert (items[1][2] == 6) options:#(#dialog)
-    assert (items[2][2] == 3) options:#(#dialog)
-    assert (items[3][2] == 2) options:#(#dialog)
-    assert (items[4][2] == 1) options:#(#dialog)
+    assert (items[1][1] == "zacharias") options:#(#listener, #dialog) showstack:true
+    assert (items[2][1] == "bernhard") options:#(#listener, #dialog) showstack:true
+    assert (items[3][1] == "thomas") options:#(#listener, #dialog) showstack:true
+    assert (items[4][1] == "andreas") options:#(#listener, #dialog) showstack:true
+    assert (items[1][2] == 6) options:#(#listener, #dialog) showstack:true
+    assert (items[2][2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (items[3][2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (items[4][2] == 1) options:#(#listener, #dialog) showstack:true
 )
 
 
