@@ -81,22 +81,122 @@ fn test_copy = (
 
 
 fn test_difference = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3, 4, 4)
 
+    local diff_set = a_set.difference a_set
+    local elements = diff_set.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
+
+    local diff_set = b_set.difference b_set
+    local elements = diff_set.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
+
+    local diff_set = a_set.difference b_set
+    local elements = diff_set.elements()
+    assert (elements.count == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+
+    local diff_set = b_set.difference a_set
+    local elements = diff_set.elements()
+    assert (elements.count == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 4) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_difference_update = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3, 4, 4)
 
+    local a_copy = a_set.copy()
+    a_copy.difference_update a_set
+    local elements = a_copy.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
+
+    local b_copy = b_set.copy()
+    b_copy.difference_update b_set
+    local elements = b_copy.elements()
+    assert (elements.count == 0) options:#(#listener, #dialog) showstack:true
+
+    local a_copy = a_set.copy()
+    a_copy.difference_update b_set
+    local elements = a_copy.elements()
+    assert (elements.count == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+
+    local b_copy = b_set.copy()
+    b_copy.difference_update a_set
+    local elements = b_copy.elements()
+    assert (elements.count == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 4) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_intersection = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3, 4, 4)
 
+    local intersect_set = a_set.intersection a_set
+    local elements = intersect_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
+
+    local intersect_set = b_set.intersection b_set
+    local elements = intersect_set.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 4) options:#(#listener, #dialog) showstack:true
+
+    local intersect_set = a_set.intersection b_set
+    local elements = intersect_set.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
+
+    local intersect_set = b_set.intersection a_set
+    local elements = intersect_set.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
 fn test_intersection_update = (
+    local a_set = mxs_set #(1, 1, 2, 2, 3, 3)
+    local b_set = mxs_set #(2, 2, 3, 3, 4, 4)
 
+    local a_copy = a_set.copy()
+    a_copy.intersection_update a_set
+    local elements = a_copy.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
+
+    local b_copy = b_set.copy()
+    b_copy.intersection_update b_set
+    local elements = b_copy.elements()
+    assert (elements.count == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
+    assert (elements[3] == 4) options:#(#listener, #dialog) showstack:true
+
+    local a_copy = a_set.copy()
+    a_copy.intersection_update b_set
+    local elements = a_copy.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
+
+    local b_copy = b_set.copy()
+    b_copy.intersection_update a_set
+    local elements = b_copy.elements()
+    assert (elements.count == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[1] == 2) options:#(#listener, #dialog) showstack:true
+    assert (elements[2] == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -144,6 +244,10 @@ fn test_to_array = (
 
 )
 
+fn test_different_objecttypes = (
+
+)
+
 
 test_from_array()
 test_elements()
@@ -163,6 +267,7 @@ test_symmetric_difference()
 test_symmetric_difference_update()
 test_union()
 test_update()
+test_different_objecttypes()
 
 
 print "test_mxs_set finished."
