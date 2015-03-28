@@ -201,8 +201,9 @@ struct mxs_set (
     ),
 
     private
-    fn _is_in array_ item_ = (
-        local idx = findItem array_ item_
+    fn _is_in set_ item_ = (
+        local elements_ = set_.elements()
+        local idx = findItem elements_ item_
         idx != 0
     ),
 
