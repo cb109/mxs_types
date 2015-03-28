@@ -260,6 +260,10 @@ struct mxs_defaultdict (
 
     The rest of the API works as in mxs_dict.
 
+    It is useful for manipulating values on the fly that
+    can be modified in-place, like arrays or custom struct
+    instances, for collecting or counting objects.
+
     Example:
 
     fn list = #()
@@ -306,8 +310,8 @@ struct mxs_defaultdict (
     fn get key  = (
         /***Unknown keys will trigger insertion of
         the value returned by default_factory.***/
-        if not this.default_factory != undefined and \
-                this._dict.has_key key do (
+        if this.default_factory != undefined and \
+                not (this._dict.has_key key) do (
             local val = this.default_factory()
             this.add key val
             return val
