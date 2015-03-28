@@ -260,6 +260,37 @@ fn test_sort_by_value = (
 )
 
 
+fn test_mxs_defaultdict = (
+    local dd = mxs_defaultdict()
+    assert ((dd.get "test") == undefined) options:#(#listener, #dialog) showstack:true
+
+    fn list = #()
+    local dd = mxs_defaultdict list
+    append (dd.get "foo") 123
+    append (dd.get "foo") 456
+    append (dd.get "foo") 789
+    append (dd.get "bar") "something"
+    local items = dd.items()
+    assert (items.count == 2) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[1] == 123) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[2] == 456) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[3] == 789) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "bar")[1] == "something") options:#(#listener, #dialog) showstack:true
+
+    -- Using a custom struct as the default_factory:
+    struct Counter (
+        n = 0,
+        fn iterate = this.n += 1
+    )
+    local dd = mxs_defaultdict Counter
+    (dd.get "occurrences").iterate()
+    (dd.get "occurrences").iterate()
+    (dd.get "occurrences").iterate()
+    local val = (dd.get "occurrences").n
+    assert (val == 3) options:#(#listener, #dialog) showstack:true
+)
+
+
 test_fromkeys()
 test_has_key()
 test_get()
@@ -274,6 +305,7 @@ test_popitem()
 test_update()
 test_sort_by_key()
 test_sort_by_value()
+test_mxs_defaultdict()
 
 
 print "test_mxs_dict finished."
