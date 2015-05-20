@@ -191,7 +191,7 @@ struct mxs_dict (
             this.add input_keys[i] input_values[i]
     ),
 
-    private
+    public
     fn _sort_by item1 item2 item_index:1 reversed:False = (
         /***Used to sort by key or value
         based on the given items.***/
@@ -208,7 +208,7 @@ struct mxs_dict (
         )
     ),
 
-    private
+    public
     fn _update_arrays items = (
         /***As sorting is based on items, this function
         empties and rebuilds the _keys and _values arrays.***/
@@ -278,34 +278,33 @@ struct mxs_defaultdict (
     public
     default_factory,
 
-    -- Initial values setup in event handler below.
-    _keys,
-    _values,
-
     private
-    _dict,
+    _dict = mxs_dict(),
 
     public
-    fn fromkeys keys default:undefined = (
-        this._dict.fromkeys keys default:default
-    ),
+    _keys = this._dict._keys,
+    _values = this._dict._values,
 
-
+    -- Delegates to mxs_dict methods.
     public
-    fn has_key key = (
-        this._dict.has_key key
-    ),
+    fromkeys = this._dict.fromkeys,
+    has_key = this._dict.has_key,
+    add = this._dict.add,
+    set_ = this._dict.set_,
+    keys = this._dict.keys,
+    values = this._dict.values,
+    items = this._dict.items,
+    clear = this._dict.clear,
+    copy = this._dict.copy,
+    pop = this._dict.pop,
+    popitem = this._dict.popitem,
+    update = this._dict.update,
+    sort_by_key = this._dict.sort_by_key,
+    sort_by_value = this._dict.sort_by_value,
+    _sort_by = this._dict._sort_by,
+    _update_arrays = this._dict._update_arrays,
 
-    public
-    fn add key val = (
-        this._dict.add key val
-    ),
-
-    public
-    fn set_ key val = (
-        this._dict.set_ key val
-    ),
-
+    -- Overriden methods.
     public
     fn get key  = (
         /***Unknown keys will trigger insertion of
@@ -318,72 +317,5 @@ struct mxs_defaultdict (
         )
 
         this._dict.get key
-    ),
-
-    public
-    fn keys = (
-        this._dict.keys()
-    ),
-
-    public
-    fn values = (
-        this._dict.values()
-    ),
-
-    public
-    fn items = (
-        this._dict.items()
-    ),
-
-    public
-    fn clear = (
-        this._dict.clear()
-    ),
-
-    public
-    fn copy = (
-        this._dict.copy()
-    ),
-
-    public
-    fn pop key default: = (
-        this._dict.pop()
-    ),
-
-    public
-    fn popitem = (
-        this._dict.popitem()
-    ),
-
-    public
-    fn update dict_ = (
-        this._dict.update()
-    ),
-
-    private
-    fn _sort_by item1 item2 item_index:1 reversed:False = (
-        this._dict._sort_by item1 item2 \
-            item_index:item_index reversed:reversed
-    ),
-
-    private
-    fn _update_arrays items = (
-        this._dict._update_arrays items
-    ),
-
-    public
-    fn sort_by_key reversed:False = (
-        this._dict.sort_by_key reversed:reversed
-    ),
-
-    public
-    fn sort_by_value reversed:False = (
-        this._dict.sort_by_value reversed:reversed
-    ),
-
-    on create do (
-        this._dict = mxs_dict()
-        this._keys = this._dict._keys
-        this._values = this._dict._values
     )
 )
