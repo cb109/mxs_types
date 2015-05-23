@@ -285,26 +285,11 @@ struct mxs_defaultdict (
     _keys = this._dict._keys,
     _values = this._dict._values,
 
-    -- Delegates to mxs_dict methods.
+    -- Override the get() method while delegating all others.
     public
     fromkeys = this._dict.fromkeys,
     has_key = this._dict.has_key,
-    add = this._dict.add,
-    set_ = this._dict.set_,
-    keys = this._dict.keys,
-    values = this._dict.values,
-    items = this._dict.items,
-    clear = this._dict.clear,
-    copy = this._dict.copy,
-    pop = this._dict.pop,
-    popitem = this._dict.popitem,
-    update = this._dict.update,
-    sort_by_key = this._dict.sort_by_key,
-    sort_by_value = this._dict.sort_by_value,
-    _sort_by = this._dict._sort_by,
-    _update_arrays = this._dict._update_arrays,
 
-    -- Overriden methods.
     public
     fn get key  = (
         /***Unknown keys will trigger insertion of
@@ -317,5 +302,19 @@ struct mxs_defaultdict (
         )
 
         this._dict.get key
-    )
+    ),
+
+    public
+    keys = this._dict.keys,
+    values = this._dict.values,
+    items = this._dict.items,
+    clear = this._dict.clear,
+    add = this._dict.add,
+    set_ = this._dict.set_,
+    copy = this._dict.copy,
+    pop = this._dict.pop,
+    popitem = this._dict.popitem,
+    update = this._dict.update,
+    sort_by_key = this._dict.sort_by_key,
+    sort_by_value = this._dict.sort_by_value
 )
