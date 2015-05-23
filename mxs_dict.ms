@@ -38,7 +38,7 @@ struct mxs_dict (
     ***/
 
     -- Public for tests and convenience.
-    -- Modification however may break the dict.
+    -- Do not modify directly.
     public
     _keys = #(),
     _values = #(),
@@ -63,6 +63,14 @@ struct mxs_dict (
         /***Returns True if the key is part
         of the dict, False otherwise.***/
         local idx = findItem this._keys key
+        idx != 0
+    ),
+
+    public
+    fn has_value val = (
+        /***Returns True if the value is part
+        of the dict, False otherwise.***/
+        local idx = findItem this._values val
         idx != 0
     ),
 
@@ -289,6 +297,7 @@ struct mxs_defaultdict (
     public
     fromkeys = this._dict.fromkeys,
     has_key = this._dict.has_key,
+    has_value = this._dict.has_value,
 
     public
     fn get key  = (

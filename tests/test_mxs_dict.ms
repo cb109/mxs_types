@@ -30,6 +30,18 @@ fn test_has_key = (
 )
 
 
+fn test_has_value = (
+    local d = mxs_dict()
+    d.add "foo" 123
+
+    local value_exists = d.has_value 123
+    assert value_exists options:#(#listener, #dialog) showstack:true
+
+    local value_exists = d.has_value 456
+    assert (not value_exists) options:#(#listener, #dialog) showstack:true
+)
+
+
 fn test_get = (
     local d = mxs_dict()
     assert (d.get "nope" == undefined) options:#(#listener, #dialog) showstack:true
@@ -293,6 +305,7 @@ fn test_mxs_defaultdict = (
 
 test_fromkeys()
 test_has_key()
+test_has_value()
 test_get()
 test_keys()
 test_values()

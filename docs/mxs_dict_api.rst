@@ -10,6 +10,10 @@ mxs_dict API
     Returns True if the key is part
     of the dict, False otherwise.
 
+**has_value** ``value``
+    Returns True if the value is part
+    of the dict, False otherwise.
+
 **get** ``key`` ``default:undefined``
     Returns the value that belongs to the given key
     or the supplied default, if the key does not exist.
