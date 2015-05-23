@@ -80,6 +80,13 @@ struct mxs_dict (
     ),
 
     public
+    fn size = (
+        /***Returns the number of items in the dict.***/
+        local items = this._items()
+        items.count
+    ),
+
+    public
     fn clear = (
         /***Resets the internal key and value
         arrays, thus emptying the dict.***/
@@ -293,6 +300,7 @@ struct mxs_defaultdict (
     keys = this._dict.keys,
     values = this._dict.values,
     items = this._dict.items,
+    size = this._dict.size,
     clear = this._dict.clear,
     add = this._dict.add,
     set_ = this._dict.set_,

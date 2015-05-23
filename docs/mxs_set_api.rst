@@ -11,6 +11,9 @@ The mxs_set can be created with an array as its first argument.
 **elements**
     Return an array of unique elements.
 
+**size**
+    Returns the number of elements in the set.
+
 **add** ``element``
     Add an element to a set.
     This has no effect if the element is already present.

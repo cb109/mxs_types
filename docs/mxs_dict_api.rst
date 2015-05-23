@@ -27,6 +27,9 @@ mxs_dict API
 **items**
     Returns a list of key-value tuples.
 
+**size**
+    Returns the number of items in the dict.
+
 **clear**
     Resets the internal key and value
     arrays, thus emptying the dict.

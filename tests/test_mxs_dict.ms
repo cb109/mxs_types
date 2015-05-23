@@ -1,5 +1,5 @@
 test_dir = getFilenamePath (getSourceFileName())
-fileIn (pathConfig.appendPath test_dir @"..\mxs_dict.ms")
+fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_dict.ms")
 
 
 fn test_fromkeys = (
@@ -96,6 +96,16 @@ fn test_items = (
     assert (items[2][1] == "bar") options:#(#listener, #dialog) showstack:true
     assert (items[1][2] == 123) options:#(#listener, #dialog) showstack:true
     assert (items[2][2] == 567) options:#(#listener, #dialog) showstack:true
+)
+
+
+fn test_size = (
+    local d = mxs_dict()
+    assert (d.size() == 0) options:#(#listener, #dialog) showstack:true
+
+    d.add "foo" 1234
+    d.add "bar" 567
+    assert (d.size() == 2) options:#(#listener, #dialog) showstack:true
 )
 
 

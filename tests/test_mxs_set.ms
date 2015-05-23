@@ -1,5 +1,5 @@
 test_dir = getFilenamePath (getSourceFileName())
-fileIn (pathConfig.appendPath test_dir @"..\mxs_set.ms")
+fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_set.ms")
 
 
 fn test_from_array = (
@@ -24,6 +24,15 @@ fn test_elements = (
     assert (elements[1] == 1) options:#(#listener, #dialog) showstack:true
     assert (elements[2] == 2) options:#(#listener, #dialog) showstack:true
     assert (elements[3] == 3) options:#(#listener, #dialog) showstack:true
+)
+
+
+fn test_size = (
+    local new_set = mxs_set()
+    assert (new_set.size() == 0) options:#(#listener, #dialog) showstack:true
+
+    new_set = mxs_set #(1, 2, 2, 3, 3)
+    assert (new_set.size() == 3) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -410,6 +419,7 @@ fn test_to_array = (
 
 test_from_array()
 test_elements()
+test_size()
 test_set_elements()
 test_discard()
 test_clear()

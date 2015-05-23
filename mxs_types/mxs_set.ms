@@ -35,6 +35,12 @@ struct mxs_set (
     ),
 
     public
+    fn size = (
+        /***Returns the number of elements in the set.***/
+        this._elements.count
+    ),
+
+    public
     fn add element = (
         /***Add an element to a set.
         This has no effect if the element is already present.***/
