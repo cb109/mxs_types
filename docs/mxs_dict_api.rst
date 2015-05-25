@@ -59,7 +59,7 @@ mxs_dict API
     New key-value pairs are added, existing ones are updated.
     Can be used e.g. to merge two dicts into one.
 
-**update** ``dict_``
+**update** ``dict``
     Updates this dict in-place with the supplied one.
     New key-value pairs are added, existing ones are updated.
     Can be used e.g. to merge two dicts into one.
@@ -71,21 +71,3 @@ mxs_dict API
 **sort_by_value** ``reversed:False``
     In-place sorting of the dict's items based
     on the alphabet-/numer-ical order of the values.
-
-
-===================
-mxs_defaultdict API
-===================
-
-The mxs_defaultdict shares its API with the mxs_dict
-with the following exceptions:
-
-**default_factory**
-    Holds a function (or class/struct name) that is
-    called to create a default value for an unknown key.
-
-**get** ``key``
-    Returns the value that belongs to the given key.
-    If the key is unknown, it is added to the dictionary
-    using the value returned by the default_factory method
-    and then returned.
