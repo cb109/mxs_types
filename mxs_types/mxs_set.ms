@@ -1,3 +1,5 @@
+-- TODO: Implement a uniqueness-comparison of two Arrays.
+
 struct mxs_set (
     /***Represents a collection of unique elements.
 
