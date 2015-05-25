@@ -1,5 +1,5 @@
 struct mxs_hashdict (
-    /***Represents a mapping of keys to values.
+    /***A string-only dictionary datatype.
 
     On adding keys and values they are implicitly converted to strings.
     Therefore all items retrieved from the table will be string only.
