@@ -14,8 +14,7 @@ struct mxs_dict (
 
     ***/
 
-    -- Public for tests and convenience.
-    -- Do not modify directly.
+    -- Public for tests. Do not modify directly.
     public
     _keys = #(),
     _values = #(),
@@ -105,6 +104,7 @@ struct mxs_dict (
             append this._keys key
             append this._values val
         )
+        val
     ),
 
     public
