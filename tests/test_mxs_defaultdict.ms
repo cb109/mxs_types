@@ -1,9 +1,9 @@
 test_dir = getFilenamePath (getSourceFileName())
-fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_dict.ms")
+fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_defaultdict.ms")
 
 
 fn test_fromkeys = (
-    local d = mxs_dict.fromkeys #("foo", "bar") default:#()
+    local d = mxs_defaultdict.fromkeys #("foo", "bar") default:#()
     local keys = d.keys()
     local values = d.values()
 
@@ -19,7 +19,7 @@ fn test_fromkeys = (
 
 
 fn test_has_key = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
 
     local key_exists = d.has_key "foo"
@@ -31,7 +31,7 @@ fn test_has_key = (
 
 
 fn test_has_value = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
 
     local value_exists = d.has_value 123
@@ -43,9 +43,9 @@ fn test_has_value = (
 
 
 fn test_get = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     assert (d.get "nope" == undefined) options:#(#listener, #dialog) showstack:true
-    assert (d.get "nope" default:123 == 123) options:#(#listener, #dialog) showstack:true
+    assert (d.get "nope" default:123 == undefined) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 567
     assert (d.get "foo" == 567) options:#(#listener, #dialog) showstack:true
@@ -53,7 +53,7 @@ fn test_get = (
 
 
 fn test_keys = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     local keys = d.keys()
     assert (keys.count == 0) options:#(#listener, #dialog) showstack:true
 
@@ -68,7 +68,7 @@ fn test_keys = (
 
 
 fn test_values = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     local values = d.values()
     assert (values.count == 0) options:#(#listener, #dialog) showstack:true
 
@@ -83,7 +83,7 @@ fn test_values = (
 
 
 fn test_items = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     local items = d.items()
     assert (items.count == 0) options:#(#listener, #dialog) showstack:true
 
@@ -100,7 +100,7 @@ fn test_items = (
 
 
 fn test_size = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     assert (d.size() == 0) options:#(#listener, #dialog) showstack:true
 
     d.add "foo" 1234
@@ -110,7 +110,7 @@ fn test_size = (
 
 
 fn test_add = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     local no_val = d.get "nope"
     assert (no_val == undefined) options:#(#listener, #dialog) showstack:true
 
@@ -125,7 +125,7 @@ fn test_add = (
 
 
 fn test_clear = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
     d.add "bar" 567
     d.clear()
@@ -136,7 +136,7 @@ fn test_clear = (
 
 
 fn test_copy = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
     d.add "bar" 567
     local pot = Teapot()
@@ -162,7 +162,7 @@ fn test_copy = (
 
 
 fn test_pop = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
     d.add "bar" 567
 
@@ -178,7 +178,7 @@ fn test_pop = (
 
 
 fn test_popitem = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "foo" 123
     d.add "bar" 567
 
@@ -198,11 +198,11 @@ fn test_popitem = (
 
 
 fn test_update = (
-    local d1 = mxs_dict()
+    local d1 = mxs_defaultdict()
     d1.add "foo" 123
     d1.add "bar" 567
 
-    local d2 = mxs_dict()
+    local d2 = mxs_defaultdict()
     d2.add "foo" 999
     d2.add "test" 890
 
@@ -221,7 +221,7 @@ fn test_update = (
 
 
 fn test_sort_by_key = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "bernhard" 3
     d.add "zacharias" 6
     d.add "thomas" 2
@@ -252,7 +252,7 @@ fn test_sort_by_key = (
 
 
 fn test_sort_by_value = (
-    local d = mxs_dict()
+    local d = mxs_defaultdict()
     d.add "bernhard" 3
     d.add "zacharias" 6
     d.add "thomas" 2
@@ -282,6 +282,37 @@ fn test_sort_by_value = (
 )
 
 
+fn test_mxs_defaultdict = (
+    local dd = mxs_defaultdict()
+    assert ((dd.get "test") == undefined) options:#(#listener, #dialog) showstack:true
+
+    fn list = #()
+    local dd = mxs_defaultdict list
+    append (dd.get "foo") 123
+    append (dd.get "foo") 456
+    append (dd.get "foo") 789
+    append (dd.get "bar") "something"
+    local items = dd.items()
+    assert (items.count == 2) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[1] == 123) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[2] == 456) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "foo")[3] == 789) options:#(#listener, #dialog) showstack:true
+    assert ((dd.get "bar")[1] == "something") options:#(#listener, #dialog) showstack:true
+
+    -- Using a custom struct as the default_factory:
+    struct Counter (
+        n = 0,
+        fn iterate = this.n += 1
+    )
+    local dd = mxs_defaultdict Counter
+    (dd.get "occurrences").iterate()
+    (dd.get "occurrences").iterate()
+    (dd.get "occurrences").iterate()
+    local val = (dd.get "occurrences").n
+    assert (val == 3) options:#(#listener, #dialog) showstack:true
+)
+
+
 test_fromkeys()
 test_has_key()
 test_has_value()
@@ -297,6 +328,7 @@ test_popitem()
 test_update()
 test_sort_by_key()
 test_sort_by_value()
+test_mxs_defaultdict()
 
 
-print "test_mxs_dict finished."
+print "test_mxs_defaultdict finished."
