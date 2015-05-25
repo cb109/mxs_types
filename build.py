@@ -21,14 +21,27 @@ SEPARATION = "\n" * 3
 
 def get_license():
     with open(LICENSE_FILE) as f:
-        return f.read()
+        license = f.read()
+        return license.strip()
 
 
-def remove_fileins(lines):
-    for line in lines:
-        stripped = line.strip()
-        if not stripped.startswith("fileIn"):
-            yield line
+def process_scriptcontent(content):
+    """Removes unwanted fileIn()'s and whitespace
+    that should not be part of the final build."""
+    content = content.strip()
+    lines = content.split("\n")
+
+    def _filter_lines(lines):
+        struct_def_found = False
+        for line in lines:
+            if line.strip().startswith("struct "):
+                struct_def_found = True
+            if struct_def_found:
+                yield line
+
+    lines = list(_filter_lines(lines))
+    fixed_content = "\n".join(lines)
+    return fixed_content
 
 
 def build():
@@ -39,10 +52,9 @@ def build():
         f.write(license + SEPARATION)
         for scriptfile in SOURCE_FILES:
             scriptpath = os.path.join(ROOT_DIR, scriptfile)
-            raw_lines = open(scriptpath).readlines()
-            lines = list(remove_fileins(raw_lines))
-            content = "".join(lines)
-            f.write(content + SEPARATION)
+            content = open(scriptpath).read()
+            fixed_content = process_scriptcontent(content)
+            f.write(fixed_content + SEPARATION)
 
     print ("Build created at:", TARGET_FILE)
 
