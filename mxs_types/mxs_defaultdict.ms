@@ -26,16 +26,21 @@ struct mxs_defaultdict (
     public
     default_factory,
 
-    private
+    public
     _dict = mxs_dict(),
 
     public
-    _keys = this._dict._keys,
-    _values = this._dict._values,
+    fn fromkeys keys default:undefined = (
+        /***Returns a dict instance build from the
+        given keys and the supplied default value.***/
+        local new_ddict = mxs_defaultdict()
+        for key in keys do
+            new_ddict.add key default
+        new_ddict
+    ),
 
     -- Override the get() method while delegating all others.
     public
-    fromkeys = this._dict.fromkeys,
     has_key = this._dict.has_key,
     has_value = this._dict.has_value,
 
