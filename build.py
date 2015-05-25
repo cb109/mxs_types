@@ -9,8 +9,11 @@ import os
 
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
-SOURCE_DIR = os.path.join(ROOT_DIR, "mxs_types")
 LICENSE_FILE = os.path.join(ROOT_DIR, "LICENSE.txt")
+SOURCE_DIR = os.path.join(ROOT_DIR, "mxs_types")
+SOURCE_FILES =  [os.path.join(SOURCE_DIR, "mxs_dict.ms"),
+                 os.path.join(SOURCE_DIR, "mxs_defaultdict.ms"),
+                 os.path.join(SOURCE_DIR, "mxs_set.ms")]
 TARGET_FILE = os.path.join(ROOT_DIR, "mxs_types.ms")
 
 SEPARATION = "\n" * 3
@@ -21,18 +24,24 @@ def get_license():
         return f.read()
 
 
-def build():
-    scriptfiles = [os.path.join(SOURCE_DIR, "mxs_dict.ms"),
-                   os.path.join(SOURCE_DIR, "mxs_set.ms")]
+def remove_fileins(lines):
+    for line in lines:
+        stripped = line.strip()
+        if not stripped.startswith("fileIn"):
+            yield line
 
-    os.remove(TARGET_FILE)
+
+def build():
+    if os.path.isfile(TARGET_FILE):
+        os.remove(TARGET_FILE)
     with open(TARGET_FILE, "w") as f:
         license = get_license()
         f.write(license + SEPARATION)
-        for scriptfile in scriptfiles:
+        for scriptfile in SOURCE_FILES:
             scriptpath = os.path.join(ROOT_DIR, scriptfile)
-            content = open(scriptpath).read()
-            content = content.strip()
+            raw_lines = open(scriptpath).readlines()
+            lines = list(remove_fileins(raw_lines))
+            content = "".join(lines)
             f.write(content + SEPARATION)
 
     print ("Build created at:", TARGET_FILE)
