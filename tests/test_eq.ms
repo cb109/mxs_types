@@ -177,7 +177,23 @@ fn test_eq_structs = (
 
 
 fn test_eq_isequal = (
+    assert (eq.isequal 1 1.0) options:#(#listener) showstack:true
+    assert (not (eq.isequal 1 2)) options:#(#listener) showstack:true
+    assert (not (eq.isequal 1 "1")) options:#(#listener) showstack:true
+    assert (not (eq.isequal true (true and false))) options:#(#listener) showstack:true
+    assert (eq.isequal true (true or false)) options:#(#listener) showstack:true
+    assert (eq.isequal #(1, 2, 3) #(1, 2, 3)) options:#(#listener) showstack:true
+    assert (eq.isequal (mxs_dict.fromkeys #("foo")) (mxs_dict.fromkeys #("foo"))) options:#(#listener) showstack:true
 
+    local thing_1 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, classof)
+    local thing_2 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, classof)
+    local thing_3 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, superclassof)
+
+    assert (eq.isequal thing_1 thing_2) options:#(#listener) showstack:true
+    assert (eq.isequal thing_2 thing_1) options:#(#listener) showstack:true
+    assert (not (eq.isequal thing_1 thing_3)) options:#(#listener) showstack:true
+    assert (not (eq.isequal thing_3 thing_1)) options:#(#listener) showstack:true
+    assert (not (eq.isequal thing_2 thing_3)) options:#(#listener) showstack:true
 )
 
 
