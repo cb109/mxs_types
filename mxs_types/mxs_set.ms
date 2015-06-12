@@ -1,4 +1,4 @@
--- TODO: Implement a uniqueness-comparison of two Arrays.
+-- TODO: Implement a uniqueness-comparison of two Arrays (nested?).
 
 struct mxs_set (
     /***Represents a collection of unique elements.
@@ -46,7 +46,33 @@ struct mxs_set (
     fn add element = (
         /***Add an element to a set.
         This has no effect if the element is already present.***/
-        appendIfUnique this._elements element
+        if not classof element == Array then
+            appendIfUnique this._elements element
+        else (
+            fn cmp_arr arr1 arr2 = (
+                local same_length = arr1.count == arr2.count
+                if not same_length do
+                    return false
+
+                for i = 1 to arr1.count do (
+                    local item1 = arr1[i]
+                    local item2 = arr2[i]
+                    if not item1 == item2 do
+                        return false
+                )
+                true
+            )
+
+            local found = false
+            for elem in this._elements do
+                if classof elem == Array do (
+                    local same = cmp_arr element elem
+                    if same do
+                        found = true
+                )
+            if not found do
+                append this._elements element
+        )
     ),
 
     public
