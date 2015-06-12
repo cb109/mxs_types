@@ -11,7 +11,8 @@ import os
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 LICENSE_FILE = os.path.join(ROOT_DIR, "LICENSE.txt")
 SOURCE_DIR = os.path.join(ROOT_DIR, "mxs_types")
-SOURCE_FILES =  [os.path.join(SOURCE_DIR, "mxs_dict.ms"),
+SOURCE_FILES =  [os.path.join(SOURCE_DIR, "mxs_eq.ms"),
+                 os.path.join(SOURCE_DIR, "mxs_dict.ms"),
                  os.path.join(SOURCE_DIR, "mxs_defaultdict.ms"),
                  os.path.join(SOURCE_DIR, "mxs_hashdict.ms"),
                  os.path.join(SOURCE_DIR, "mxs_set.ms")]
