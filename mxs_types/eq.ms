@@ -11,12 +11,36 @@ struct eq (
 
     public
     fn _eq_generic gen_1 gen_2 = (
+        /***Wraps the builtin equality check.***/
         gen_1 == gen_2
     ),
 
     public
     fn _eq_arrays arr_1 arr_2 = (
+        /***Checks arrays for equality.
 
+        To be considered equal their item count, content and order have
+        to match. Calls the eq() method recursively on all items, so the
+        given arrays can be nested.
+
+        ***/
+        local same_instance = this._eq_generic arr_1 arr_2
+        if same_instance do
+            return true
+
+        local same_length = this._eq_generic arr_1.count arr_2.count
+        if not same_length do
+            return false
+
+        for i = 1 to arr_1.count do (
+            local item_1 = arr_1[i]
+            local item_2 = arr_2[i]
+
+            local items_equal = this.eq item_1 item_2
+            if not items_equal do
+                return false
+        )
+        true
     ),
 
     public
