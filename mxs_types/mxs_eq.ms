@@ -104,7 +104,7 @@ struct mxs_eq (
 
         else if (this._is_eq_struct a and \
                  this._is_eq_struct b) then
-            this._eq_struct_instances a b
+            this._eq_structs a b
 
         else
             this._eq_generics a b
