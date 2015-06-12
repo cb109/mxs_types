@@ -1,5 +1,6 @@
 test_dir = getFilenamePath (getSourceFileName())
 fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_dict.ms")
+fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_set.ms")
 fileIn (pathConfig.appendPath test_dir @"..\mxs_types\mxs_eq.ms")
 
 
@@ -163,7 +164,7 @@ fn test_mxs_eq_eq_dicts = (
 )
 
 
-fn test_mxs_eq_structs = (
+fn test_mxs_eq_eq_structs = (
     local ets_1 = EqualityTestableStruct "Guido"
     local ets_2 = EqualityTestableStruct "Guido"
     local ets_3 = EqualityTestableStruct "Tim"
@@ -202,7 +203,7 @@ test_mxs_eq_is_eq_struct()
 test_mxs_eq_eq_generics()
 test_mxs_eq_eq_arrays()
 test_mxs_eq_eq_dicts()
-test_mxs_eq_structs()
+test_mxs_eq_eq_structs()
 test_mxs_eq_isequal()
 
 print "test_mxs_eq finished."
