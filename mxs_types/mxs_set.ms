@@ -258,8 +258,14 @@ struct mxs_set (
 
     on create do (
         -- Handle array as optional first argument of constructor.
-        if this._elements != undefined then
-            this._elements = makeUniqueArray this._elements
+        if this._elements != undefined then (
+            -- makeUniqueArray() will not work if it includes other
+            -- composite structures, use add() instead to achieve this.
+            local temp = this._elements
+            this._elements = #()
+            for element in temp do
+                this.add element
+        )
         else
             this._elements = #()
     )
