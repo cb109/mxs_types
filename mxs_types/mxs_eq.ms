@@ -1,6 +1,6 @@
 -- Order must match for arrays, but not for dicts.
 
-struct eq (
+struct mxs_eq (
     /***This struct offers functions to check composite structures
     for equality which MAXScript does not offer natively..
 
@@ -111,4 +111,4 @@ struct eq (
     )
 )
 
-global eq = eq()
+global mxs_eq = mxs_eq()
