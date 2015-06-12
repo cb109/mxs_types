@@ -1,4 +1,5 @@
--- TODO: Implement a uniqueness-comparison of two Arrays (nested?).
+fileIn "mxs_eq.ms"
+
 
 struct mxs_set (
     /***Represents a collection of unique elements.
@@ -31,6 +32,21 @@ struct mxs_set (
 
     -- Instance methods.
 
+    private
+    fn _is_in set_ item_ = (
+        /***Checks if the item is part of the set.
+
+        Uses the mxs_eq module instead of findItem() or '=='to enable
+        custom equality check behaviour, though sacrifing speed.
+
+        ***/
+        local elements_ = set_.elements()
+        for element in elements_ do
+            if mxs_eq.isequal element item_ do
+                return true
+        false
+    ),
+
     public
     fn elements = (
         this._elements
@@ -46,33 +62,8 @@ struct mxs_set (
     fn add element = (
         /***Add an element to a set.
         This has no effect if the element is already present.***/
-        if not classof element == Array then
-            appendIfUnique this._elements element
-        else (
-            fn cmp_arr arr1 arr2 = (
-                local same_length = arr1.count == arr2.count
-                if not same_length do
-                    return false
-
-                for i = 1 to arr1.count do (
-                    local item1 = arr1[i]
-                    local item2 = arr2[i]
-                    if not item1 == item2 do
-                        return false
-                )
-                true
-            )
-
-            local found = false
-            for elem in this._elements do
-                if classof elem == Array do (
-                    local same = cmp_arr element elem
-                    if same do
-                        found = true
-                )
-            if not found do
-                append this._elements element
-        )
+        if not this._is_in this element do
+            append this._elements element
     ),
 
     public
@@ -207,13 +198,6 @@ struct mxs_set (
             return element
         )
         undefined
-    ),
-
-    private
-    fn _is_in set_ item_ = (
-        local elements_ = set_.elements()
-        local idx = findItem elements_ item_
-        idx != 0
     ),
 
     public
