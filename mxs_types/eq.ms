@@ -45,7 +45,17 @@ struct eq (
 
     public
     fn _eq_dicts dict_1 dict_2 = (
+        /***Checks if dict_1 is equal to dict_2.
 
+        Dictionaries can include nested arrays and other dictionaries.
+
+        The order of their keys/values/items must match, which is
+        different to e.g. Python handles this.
+
+        ***/
+        local items_1 = dict_1.items()
+        local items_2 = dict_2.items()
+        this._eq_arrays items_1 items_2
     ),
 
     public
