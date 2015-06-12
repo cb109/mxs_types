@@ -36,6 +36,37 @@ fn test_size = (
 )
 
 
+fn test_add = (
+    local new_set = mxs_set()
+    new_set.add 1
+
+    assert (new_set.size() == 1) options:#(#listener) showstack:true
+
+    new_set.add 1
+    assert (new_set.size() == 1) options:#(#listener) showstack:true
+
+    new_set.add 2
+    assert (new_set.size() == 2) options:#(#listener) showstack:true
+
+    local new_set = mxs_set #(#(1, 2, 3), #(1, 2, 3))
+    assert (new_set.size() == 1) options:#(#listener) showstack:true
+    local elements = new_set.elements()
+    assert (elements[1][1] == 1) options:#(#listener) showstack:true
+    assert (elements[1][2] == 2) options:#(#listener) showstack:true
+    assert (elements[1][3] == 3) options:#(#listener) showstack:true
+
+    local thing_1 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, classof)
+    local thing_2 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, classof)
+    local thing_3 = #(1, true, undefined, #(false, "foo", #(3, 5)), Number, superclassof)
+
+    local new_set = mxs_set #(thing_1, thing_2)
+    assert (new_set.size() == 1) options:#(#listener) showstack:true
+
+    local new_set = mxs_set #(thing_1, thing_3)
+    assert (new_set.size() == 2) options:#(#listener) showstack:true
+)
+
+
 fn test_set_elements = (
     local new_set = mxs_set()
     new_set.set_elements #(1, 2, 2, 3, 3)
@@ -419,6 +450,7 @@ fn test_to_array = (
 test_from_array()
 test_elements()
 test_size()
+test_add()
 test_set_elements()
 test_discard()
 test_clear()
