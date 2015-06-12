@@ -61,20 +61,20 @@ fn test_eq_is_eq_struct = (
 )
 
 
-fn test_eq_eq_generic = (
+fn test_eq_eq_generics = (
     local x = 789
     local y = "test"
     local z = 1.0
 
-    assert (eq._eq_generic x x) options:#(#listener) showstack:true
-    assert (not (eq._eq_generic x 788)) options:#(#listener) showstack:true
+    assert (eq._eq_generics x x) options:#(#listener) showstack:true
+    assert (not (eq._eq_generics x 788)) options:#(#listener) showstack:true
 
-    assert (eq._eq_generic y y) options:#(#listener) showstack:true
-    assert (not (eq._eq_generic y "TEST")) options:#(#listener) showstack:true
+    assert (eq._eq_generics y y) options:#(#listener) showstack:true
+    assert (not (eq._eq_generics y "TEST")) options:#(#listener) showstack:true
 
-    assert (eq._eq_generic z z) options:#(#listener) showstack:true
-    assert (eq._eq_generic z 1) options:#(#listener) showstack:true
-    assert (not (eq._eq_generic z 1.33)) options:#(#listener) showstack:true
+    assert (eq._eq_generics z z) options:#(#listener) showstack:true
+    assert (eq._eq_generics z 1) options:#(#listener) showstack:true
+    assert (not (eq._eq_generics z 1.33)) options:#(#listener) showstack:true
 )
 
 
@@ -176,16 +176,17 @@ fn test_eq_structs = (
 )
 
 
-fn test_eq_eq = (
+fn test_eq_isequal = (
 
 )
 
 
 test_eq_is_dict()
 test_eq_is_eq_struct()
-test_eq_eq_generic()
+test_eq_eq_generics()
 test_eq_eq_arrays()
 test_eq_eq_dicts()
 test_eq_structs()
+test_eq_isequal()
 
 print "done"

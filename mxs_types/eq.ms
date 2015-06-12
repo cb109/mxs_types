@@ -10,7 +10,7 @@ struct eq (
     ***/
 
     public
-    fn _eq_generic gen_1 gen_2 = (
+    fn _eq_generics gen_1 gen_2 = (
         /***Wraps the builtin equality check.***/
         gen_1 == gen_2
     ),
@@ -24,11 +24,11 @@ struct eq (
         given arrays can be nested.
 
         ***/
-        local same_instance = this._eq_generic arr_1 arr_2
+        local same_instance = this._eq_generics arr_1 arr_2
         if same_instance do
             return true
 
-        local same_length = this._eq_generic arr_1.count arr_2.count
+        local same_length = this._eq_generics arr_1.count arr_2.count
         if not same_length do
             return false
 
@@ -36,7 +36,7 @@ struct eq (
             local item_1 = arr_1[i]
             local item_2 = arr_2[i]
 
-            local items_equal = this.eq item_1 item_2
+            local items_equal = this.isequal item_1 item_2
             if not items_equal do
                 return false
         )
@@ -86,7 +86,14 @@ struct eq (
     ),
 
     public
-    fn eq a b = (
+    fn isequal a b = (
+        /***Checks if a is equal to b.
+
+        a and b can be anything, the proper comparison method is
+        identified automatically here. This method can be used as a
+        replacement for the generic 'a == b'.
+
+        ***/
         if (classof a == Array and \
             classof b == Array) then
                 this._eq_arrays a b
@@ -100,7 +107,7 @@ struct eq (
             this._eq_struct_instances a b
 
         else
-            this._eq_generic a b
+            this._eq_generics a b
     )
 )
 
