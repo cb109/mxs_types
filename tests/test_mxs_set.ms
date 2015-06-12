@@ -354,7 +354,6 @@ fn test_union = (
     assert (elements[2] == 3) options:#(#listener) showstack:true
     assert (elements[3] == 4) options:#(#listener) showstack:true
     assert (elements[4] == 1) options:#(#listener) showstack:true
-
 )
 
 
