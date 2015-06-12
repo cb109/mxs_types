@@ -1,11 +1,12 @@
--- Order must match for arrays, but not for dicts.
-
 struct mxs_eq (
     /***This struct offers functions to check composite structures
-    for equality which MAXScript does not offer natively..
+    for equality which MAXScript does not offer natively.
 
     That includes arrays and custom dictionaries (flat and nested).
     It can also compare any struct instances that implement __eq__().
+
+    Note: Dicts must implement keys(), values() and items() and return
+    an array for each.
 
     ***/
 
