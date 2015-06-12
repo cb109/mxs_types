@@ -17,15 +17,15 @@ fn test_eq_eq_generic = (
     local y = "test"
     local z = 1.0
 
-    assert (eq._eq_generic x x) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._eq_generic x 788)) options:#(#listener, #dialog) showstack:true
+    assert (eq._eq_generic x x) options:#(#listener) showstack:true
+    assert (not (eq._eq_generic x 788)) options:#(#listener) showstack:true
 
-    assert (eq._eq_generic y y) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._eq_generic y "TEST")) options:#(#listener, #dialog) showstack:true
+    assert (eq._eq_generic y y) options:#(#listener) showstack:true
+    assert (not (eq._eq_generic y "TEST")) options:#(#listener) showstack:true
 
-    assert (eq._eq_generic z z) options:#(#listener, #dialog) showstack:true
-    assert (eq._eq_generic z 1) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._eq_generic z 1.33)) options:#(#listener, #dialog) showstack:true
+    assert (eq._eq_generic z z) options:#(#listener) showstack:true
+    assert (eq._eq_generic z 1) options:#(#listener) showstack:true
+    assert (not (eq._eq_generic z 1.33)) options:#(#listener) showstack:true
 )
 
 
@@ -79,12 +79,12 @@ fn test_eq_is_dict = (
     d.add "bar" 456
     local ets = EqualityTestableStruct "Bob"
 
-    assert (not (eq._is_dict x)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_dict y)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_dict z)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_dict a)) options:#(#listener, #dialog) showstack:true
-    assert ((eq._is_dict d)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_dict ets)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict x)) options:#(#listener) showstack:true
+    assert (not (eq._is_dict y)) options:#(#listener) showstack:true
+    assert (not (eq._is_dict z)) options:#(#listener) showstack:true
+    assert (not (eq._is_dict a)) options:#(#listener) showstack:true
+    assert ((eq._is_dict d)) options:#(#listener) showstack:true
+    assert (not (eq._is_dict ets)) options:#(#listener) showstack:true
 )
 
 
@@ -98,12 +98,12 @@ fn test_eq_is_eq_struct = (
     d.add "bar" 456
     local ets = EqualityTestableStruct "Bob"
 
-    assert (not (eq._is_eq_struct x)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_eq_struct y)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_eq_struct z)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_eq_struct a)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._is_eq_struct d)) options:#(#listener, #dialog) showstack:true
-    assert ((eq._is_eq_struct ets)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_eq_struct x)) options:#(#listener) showstack:true
+    assert (not (eq._is_eq_struct y)) options:#(#listener) showstack:true
+    assert (not (eq._is_eq_struct z)) options:#(#listener) showstack:true
+    assert (not (eq._is_eq_struct a)) options:#(#listener) showstack:true
+    assert (not (eq._is_eq_struct d)) options:#(#listener) showstack:true
+    assert ((eq._is_eq_struct ets)) options:#(#listener) showstack:true
 )
 
 
