@@ -8,3 +8,4 @@ fileIn @"test_mxs_hashdict.ms"
 fileIn @"test_mxs_set.ms"
 
 print "All tests finished."
+OK
