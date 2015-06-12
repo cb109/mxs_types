@@ -54,7 +54,9 @@ struct eq (
     ),
 
     public
-    fn _looks_like_dict thing = (
+    fn _is_dict thing = (
+        /***Checks if thing is a dictionary instance, as defined by the
+        API of e.g. mxs_dict and its derivative / sibling structs.***/
         (thing != undefined and \
          isProperty thing "items" and \
          isProperty thing "keys" and \
@@ -64,7 +66,10 @@ struct eq (
 
     public
     fn _is_eq_struct thing = (
-        (superClassOf thing == StructDef and \
+        /***Checks if thing is a struct that implements the __eq__()
+        method and therefore needs to be handled accordingly.***/
+        (thing != undefined and \
+         superClassOf thing == StructDef and \
          isProperty thing "__eq__")
     ),
 
@@ -74,8 +79,8 @@ struct eq (
             classof b == Array) then
                 this._eq_arrays a b
 
-        else if (this._looks_like_dict a and \
-                 this._looks_like_dict b) then
+        else if (this._is_dict a and \
+                 this._is_dict b) then
             this._eq_dicts a b
 
         else if (this._is_eq_struct a and \

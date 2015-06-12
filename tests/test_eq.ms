@@ -69,7 +69,7 @@ fn test_eq_struct_instances = (
 )
 
 
-fn test_eq_looks_like_dict = (
+fn test_eq_is_dict = (
     local x = 789
     local y = "test"
     local z = true
@@ -79,12 +79,12 @@ fn test_eq_looks_like_dict = (
     d.add "bar" 456
     local ets = EqualityTestableStruct "Bob"
 
-    assert (not (eq._looks_like_dict x)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._looks_like_dict y)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._looks_like_dict z)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._looks_like_dict a)) options:#(#listener, #dialog) showstack:true
-    assert ((eq._looks_like_dict d)) options:#(#listener, #dialog) showstack:true
-    assert (not (eq._looks_like_dict ets)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict x)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict y)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict z)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict a)) options:#(#listener, #dialog) showstack:true
+    assert ((eq._is_dict d)) options:#(#listener, #dialog) showstack:true
+    assert (not (eq._is_dict ets)) options:#(#listener, #dialog) showstack:true
 )
 
 
@@ -113,7 +113,7 @@ fn test_eq_eq = (
 
 
 test_eq_eq_generic()
-test_eq_looks_like_dict()
+test_eq_is_dict()
 test_eq_is_eq_struct()
 test_eq_eq_arrays()
 
