@@ -49,8 +49,10 @@ struct eq (
     ),
 
     public
-    fn _eq_struct_instances struct_1 struct_2 = (
-
+    fn _eq_structs struct_1 struct_2 = (
+        /***Checks if struct_1 is equal to struct_2 by calling its
+        custom __eq__() implementation.***/
+        struct_1.__eq__ struct_2
     ),
 
     public

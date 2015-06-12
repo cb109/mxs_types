@@ -4,10 +4,21 @@ fileIn (pathConfig.appendPath test_dir @"..\mxs_types\eq.ms")
 
 
 struct EqualityTestableStruct (
+    /***Dummy struct for testing.***/
     name,
 
     fn __eq__ other = (
-        toLower this.name == tLower other.name
+        /***We implement some custom behaviour for testing here:
+
+        If 'other' is actually the same instance than this struct
+        instance, we want it to be not equal. In any other case, we
+        define both being equal if their names match, while ignoring its
+        case.
+
+        ***/
+        if other == this do
+            return false
+        toLower this.name == toLower other.name
     )
 )
 
@@ -64,8 +75,16 @@ fn test_eq_eq_dicts = (
 )
 
 
-fn test_eq_struct_instances = (
+fn test_eq_structs = (
+    local ets_1 = EqualityTestableStruct "Guido"
+    local ets_2 = EqualityTestableStruct "Guido"
+    local ets_3 = EqualityTestableStruct "Tim"
+    local ets_4 = EqualityTestableStruct "GUIDO"
 
+    assert (not (eq._eq_structs ets_1 ets_1)) options:#(#listener) showstack:true
+    assert (eq._eq_structs ets_1 ets_2) options:#(#listener) showstack:true
+    assert (not (eq._eq_structs ets_1 ets_3)) options:#(#listener) showstack:true
+    assert (eq._eq_structs ets_1 ets_4) options:#(#listener) showstack:true
 )
 
 
@@ -116,5 +135,6 @@ test_eq_eq_generic()
 test_eq_is_dict()
 test_eq_is_eq_struct()
 test_eq_eq_arrays()
+test_eq_structs()
 
 print "done"
