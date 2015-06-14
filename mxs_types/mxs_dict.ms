@@ -14,8 +14,8 @@ struct mxs_dict (
 
     ***/
 
-    -- Public for tests. Do not modify directly.
     public
+    -- Do not modify directly.
     _keys = #(),
     _values = #(),
 
@@ -105,16 +105,6 @@ struct mxs_dict (
             append this._values val
         )
         val
-    ),
-
-    public
-    fn set_ key val = (
-        /***Can be used as an alias for add().
-
-        set() unfortunately is a reserved MXS keyword.
-
-        ***/
-        this.add key val
     ),
 
     public

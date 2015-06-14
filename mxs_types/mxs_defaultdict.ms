@@ -65,7 +65,6 @@ struct mxs_defaultdict (
     size = this._dict.size,
     clear = this._dict.clear,
     add = this._dict.add,
-    set_ = this._dict.set_,
     copy = this._dict.copy,
     pop = this._dict.pop,
     popitem = this._dict.popitem,

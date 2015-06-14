@@ -38,10 +38,6 @@ mxs_dict API
     Adds a new key-value pair if the key is new.
     Updates the value for the existing key otherwise.
 
-**set_** ``key`` ``val``
-    Can be used as an alias for add().
-    set() unfortunately is a reserved MXS keyword.
-
 **copy()**
     Returns a shallow copy of this dict.
     If the keys or values are referenced datatypes,

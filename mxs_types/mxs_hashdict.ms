@@ -12,8 +12,8 @@ struct mxs_hashdict (
 
     ***/
 
-    -- Public for tests. Do not modify directly.
     public
+    -- Do not modify directly.
     _table = dotNetObject "System.Collections.HashTable",
 
     private
@@ -116,16 +116,6 @@ struct mxs_hashdict (
         if needs_update do
             this._table.Remove (this._dns key)
         this._table.Add (this._dns key) (this._dns val)
-    ),
-
-    public
-    fn set_ key val = (
-        /***Can be used as an alias for add().
-
-        set() unfortunately is a reserved MXS keyword.
-
-        ***/
-        this.add key val
     ),
 
     public
