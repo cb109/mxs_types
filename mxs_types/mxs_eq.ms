@@ -95,15 +95,15 @@ struct mxs_eq (
         replacement for the generic 'a == b'.
 
         ***/
-        if (classof a == Array and \
+        if (classof a == Array and
             classof b == Array) then
                 this._eq_arrays a b
 
-        else if (this._is_dict a and \
+        else if (this._is_dict a and
                  this._is_dict b) then
             this._eq_dicts a b
 
-        else if (this._is_eq_struct a and \
+        else if (this._is_eq_struct a and
                  this._is_eq_struct b) then
             this._eq_structs a b
 
