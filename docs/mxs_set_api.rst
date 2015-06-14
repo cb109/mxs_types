@@ -8,10 +8,10 @@ The mxs_set can be created with an array as its first argument.
 **from_array** ``array``
     Static function to return a new set based on the given array.
 
-**elements**
+**elements()**
     Return an array of unique elements.
 
-**size**
+**size()**
     Returns the number of elements in the set.
 
 **add** ``element``
@@ -26,10 +26,10 @@ The mxs_set can be created with an array as its first argument.
     Remove an element from a set if it is a member.
     If the element is not a member, do nothing.
 
-**clear**
+**clear()**
     Remove all elements from this set.
 
-**copy**
+**copy()**
     Return a shallo wcopy of a set.
 
 **difference** ``set``
@@ -55,7 +55,7 @@ The mxs_set can be created with an array as its first argument.
 **issuperset** ``set``
     Report whether this set contains another set.
 
-**pop**
+**pop()**
     Remove and return an arbitrary set element.
     Return undefined if the set is empty.
 
@@ -78,5 +78,5 @@ The mxs_set can be created with an array as its first argument.
     Update a set with the union of itself and a new set
     (which is created based on the given array).
 
-**to_array**
+**to_array()**
     Return the set content as an array.

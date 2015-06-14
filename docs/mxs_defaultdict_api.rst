@@ -6,8 +6,8 @@ The mxs_defaultdict shares its API with the mxs_dict with the following
 exceptions:
 
 **default_factory**
-    Holds a function (or class/struct name) that is
-    called to create a default value for an unknown key.
+    This attribute holds a function (or class/struct) name that
+    is called to create a default value for an unknown key.
 
 **get** ``key``
     Returns the value that belongs to the given key.

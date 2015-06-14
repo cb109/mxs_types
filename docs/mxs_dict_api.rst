@@ -2,7 +2,7 @@
 mxs_dict API
 ============
 
-**fromkeys** ``keys`` ``default:undefined``
+**fromkeys()** ``keys`` ``default:undefined``
     Returns a dict instance build from the
     given keys and the supplied default value.
 
@@ -18,19 +18,19 @@ mxs_dict API
     Returns the value that belongs to the given key
     or the supplied default, if the key does not exist.
 
-**keys**
+**keys()**
     Returns a list of keys.
 
-**values**
+**values()**
     Returns a list of values.
 
-**items**
+**items()**
     Returns a list of key-value tuples.
 
-**size**
+**size()**
     Returns the number of items in the dict.
 
-**clear**
+**clear()**
     Resets the internal key and value
     arrays, thus emptying the dict.
 
@@ -42,7 +42,7 @@ mxs_dict API
     Can be used as an alias for add().
     set() unfortunately is a reserved MXS keyword.
 
-**copy**
+**copy()**
     Returns a shallow copy of this dict.
     If the keys or values are referenced datatypes,
     these references are kept intact, no copies are made.
@@ -54,7 +54,7 @@ mxs_dict API
     returned instead of the actual value.
     Returns undefined if the key does not exist.
 
-**popitem**
+**popitem()**
     Updates this dict in-place with the supplied one.
     New key-value pairs are added, existing ones are updated.
     Can be used e.g. to merge two dicts into one.
