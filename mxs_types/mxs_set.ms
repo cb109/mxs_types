@@ -33,16 +33,25 @@ struct mxs_set (
     -- Instance methods.
 
     private
-    fn _is_in set_ item_ = (
-        /***Checks if the item is part of the set.
+    fn _is_eq a b = (
+        /***Checks if a and b are equal.
 
-        Uses the mxs_eq module instead of findItem() or '=='to enable
-        custom equality check behaviour, though sacrifing speed.
+        Will use advanced equality checking via the mxs_eq module, if
+        available, or the default as fallback.
 
         ***/
+        if ::mxs_eq != undefined then
+            mxs_eq.isequal a b
+        else
+            a == b
+    ),
+
+    private
+    fn _is_in set_ item_ = (
+        /***Checks if the item is part of the set.***/
         local elements_ = set_.elements()
         for element in elements_ do
-            if mxs_eq.isequal element item_ do
+            if this._is_eq element item_ do
                 return true
         false
     ),
