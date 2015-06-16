@@ -1,3 +1,5 @@
+/***mxs_types examples***/
+
 -- Create some objects.
 delete objects
 Teapot name:"Teapot001"
