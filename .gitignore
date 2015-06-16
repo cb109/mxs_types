@@ -1,0 +1,5 @@
+__pycache__
+*.py[cod]
+*.sublime-*
+mxs_types.ms
+docs/_build

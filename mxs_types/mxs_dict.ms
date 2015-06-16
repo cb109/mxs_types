@@ -1,5 +1,5 @@
 struct mxs_dict (
-    /***Simple implementation of a dictionary using lists.
+    /***Represents a mapping of keys to values.
 
     Anything can be used as a key or value, e.g. scene objects,
     materials, color values or controllers, making it very versatile.
@@ -7,16 +7,15 @@ struct mxs_dict (
     Supports sorting by key/value if keys/values are all of the
     same comparable type (e.g. all strings or numbers).
 
-    The interface is loosely based on Python's dict API.
     Note: This is not a 'real' hash table, just parallel arrays,
     resulting in low performance when used with many items.
 
-    (c) Christoph Buelter
-    February 2015, www.cbuelter.de
+    The interface is loosely based on Python's dict API.
 
     ***/
 
-    public  -- Public for tests and convenience.
+    public
+    -- Do not modify directly.
     _keys = #(),
     _values = #(),
 
@@ -32,7 +31,6 @@ struct mxs_dict (
         new_dict
     ),
 
-
     -- Instance methods.
 
     public
@@ -40,6 +38,14 @@ struct mxs_dict (
         /***Returns True if the key is part
         of the dict, False otherwise.***/
         local idx = findItem this._keys key
+        idx != 0
+    ),
+
+    public
+    fn has_value val = (
+        /***Returns True if the value is part
+        of the dict, False otherwise.***/
+        local idx = findItem this._values val
         idx != 0
     ),
 
@@ -73,6 +79,13 @@ struct mxs_dict (
     ),
 
     public
+    fn size = (
+        /***Returns the number of items in the dict.***/
+        local items = this._items()
+        items.count
+    ),
+
+    public
     fn clear = (
         /***Resets the internal key and value
         arrays, thus emptying the dict.***/
@@ -91,16 +104,7 @@ struct mxs_dict (
             append this._keys key
             append this._values val
         )
-    ),
-
-    public
-    fn set_ key val = (
-        /***Can be used as an alias for add().
-
-        set() unfortunately is a reserved MXS keyword.
-
-        ***/
-        this.add key val
+        val
     ),
 
     public
@@ -168,7 +172,7 @@ struct mxs_dict (
             this.add input_keys[i] input_values[i]
     ),
 
-    private
+    public
     fn _sort_by item1 item2 item_index:1 reversed:False = (
         /***Used to sort by key or value
         based on the given items.***/
@@ -185,12 +189,11 @@ struct mxs_dict (
         )
     ),
 
-    private
+    public
     fn _update_arrays items = (
         /***As sorting is based on items, this function
         empties and rebuilds the _keys and _values arrays.***/
-        this._keys = #()
-        this._values = #()
+        this.clear()
         for i = 1 to items.count do (
             this._keys[i] = items[i][1]
             this._values[i] = items[i][2]
