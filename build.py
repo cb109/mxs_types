@@ -8,6 +8,9 @@ Call from the root directory like:
 import os
 
 
+__version__ = "0.9.0"
+
+
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 LICENSE_FILE = os.path.join(ROOT_DIR, "LICENSE.txt")
 SOURCE_DIR = os.path.join(ROOT_DIR, "mxs_types")
@@ -25,6 +28,10 @@ def get_license():
     with open(LICENSE_FILE) as f:
         license = f.read()
         return license.strip()
+
+
+def inject_version(license):
+    return license.format(version=__version__)
 
 
 def process_scriptcontent(content):
@@ -51,6 +58,7 @@ def build():
         os.remove(TARGET_FILE)
     with open(TARGET_FILE, "w") as f:
         license = get_license()
+        license = inject_version(license)
         f.write(license + SEPARATION)
         for scriptfile in SOURCE_FILES:
             scriptpath = os.path.join(ROOT_DIR, scriptfile)
@@ -58,7 +66,7 @@ def build():
             fixed_content = process_scriptcontent(content)
             f.write(fixed_content + SEPARATION)
 
-    print ("Build created at:", TARGET_FILE)
+    print ("Build created at: " + TARGET_FILE)
 
 
 if __name__ == "__main__":
