@@ -37,3 +37,10 @@ Examples
 
 .. literalinclude:: examples.ms
     :language: c++
+
+
+*********
+Benchmark
+*********
+
+.. image:: docs/benchmark.png
