@@ -7,6 +7,6 @@ mxs_types
     :copyright: Copyright (c) 2015 Christoph Buelter
     :license: See LICENSE.txt.
 
-    See documentation at::
+    See documentation at:
 
-        https://readthedocs.org/projects/mxs-types/
+        http://mxs-types.readthedocs.org/en/master/
