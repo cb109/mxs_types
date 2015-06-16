@@ -2,7 +2,7 @@
 mxs_dict API
 ============
 
-**fromkeys()** ``keys`` ``default:undefined``
+**fromkeys** ``keys`` ``default:undefined``
     Returns a dict instance build from the
     given keys and the supplied default value.
 
