@@ -9,4 +9,4 @@ mxs_types
 
     See documentation at:
 
-        http://mxs-types.readthedocs.org/en/master/
+        http://mxs-types.readthedocs.org/latest/
