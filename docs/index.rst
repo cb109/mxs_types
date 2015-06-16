@@ -43,4 +43,4 @@ Examples
 Benchmark
 *********
 
-.. image:: docs/benchmark.png
+.. image:: benchmark/benchmark.png
