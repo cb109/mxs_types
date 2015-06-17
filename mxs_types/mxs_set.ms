@@ -11,9 +11,9 @@ struct mxs_set (
     Or with an array as its first argument to start with:
         mxs_set #(...)
 
-    Note: Elements can have any type, but be aware that due
-    to MAXScript limitations some values can not be tested
-    for uniqueness, e.g. when comparing arrays.
+    Note: Elements can have any type, but be aware that due to MAXScript
+    limitations some values may be tested for uniqueness, although we
+    use the mxs_eq module to keep this to a minimum.
 
     The interface is loosely based on Python's set API.
 
