@@ -12,11 +12,9 @@ struct mxs_hashdict (
 
     ***/
 
-    public
     -- Do not modify directly.
     _table = dotNetObject "System.Collections.HashTable",
 
-    private
     fn _dns thing = (
         /***Converts thing to a dotNet compatible string.***/
         dotNetObject "System.String" (thing as String)
@@ -24,7 +22,6 @@ struct mxs_hashdict (
 
     -- Static methods.
 
-    public
     fn fromkeys keys default:"" = (
         /***Returns a dict instance build from the
         given keys and the supplied default value.***/
@@ -36,21 +33,18 @@ struct mxs_hashdict (
 
     -- Instance methods.
 
-    public
     fn has_key key = (
         /***Returns True if the key is part
         of the dict, False otherwise.***/
         this._table.ContainsKey (this._dns key)
     ),
 
-    public
     fn has_value val = (
         /***Returns True if the value is part
         of the dict, False otherwise.***/
         this._table.ContainsValue (this._dns val)
     ),
 
-    public
     fn get key default:undefined = (
         /***Returns the value that belongs to the given key
         or the supplied default, if the key does not exist.***/
@@ -61,7 +55,6 @@ struct mxs_hashdict (
             default
     ),
 
-    public
     fn keys = (
         /***Returns a list of keys.***/
         local keys = #()
@@ -71,7 +64,6 @@ struct mxs_hashdict (
         keys
     ),
 
-    public
     fn values = (
         /***Returns a list of values.***/
         local values = #()
@@ -81,7 +73,6 @@ struct mxs_hashdict (
         values
     ),
 
-    public
     fn items = (
         /***Returns a list of key-value tuples.***/
         local items = #()
@@ -91,20 +82,17 @@ struct mxs_hashdict (
         items
     ),
 
-    public
     fn size = (
         /***Returns the number of items in the dict.***/
         this._table.Count
     ),
 
-    public
     fn clear = (
         /***Resets the internal key and value
         arrays, thus emptying the dict.***/
         this._table.Clear()
     ),
 
-    public
     fn add key val = (
         /***Adds a new key-value pair if the key is new.
         Updates the value for the existing key otherwise.
@@ -118,7 +106,6 @@ struct mxs_hashdict (
         this._table.Add (this._dns key) (this._dns val)
     ),
 
-    public
     fn copy = (
         /***Returns a shallow copy of this dict.***/
         local new_hdict = mxs_hashdict()
@@ -126,7 +113,6 @@ struct mxs_hashdict (
         new_hdict
     ),
 
-    public
     fn pop key default: = (
         /***Returns the value for the given key,
         effectively removing this item from the dict.
@@ -147,7 +133,6 @@ struct mxs_hashdict (
         undefined
     ),
 
-    public
     fn popitem = (
         /***Returns a random key-value tuple from the
         dict, effectively removing this item from it.***/
@@ -163,7 +148,6 @@ struct mxs_hashdict (
         undefined
     ),
 
-    public
     fn update dict_ = (
         /***Updates this dict in-place with the supplied one.
 

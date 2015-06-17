@@ -19,12 +19,10 @@ struct mxs_set (
 
     ***/
 
-    public
     _elements,  -- Initialized in event handler.
 
     -- Static methods.
 
-    public
     fn from_array array_ = (
         /***Returns a new set based on the given array.***/
         mxs_set array_
@@ -32,7 +30,6 @@ struct mxs_set (
 
     -- Instance methods.
 
-    private
     fn _is_eq a b = (
         /***Checks if a and b are equal.
 
@@ -46,7 +43,6 @@ struct mxs_set (
             a == b
     ),
 
-    private
     fn _is_in set_ item_ = (
         /***Checks if the item is part of the set.***/
         local elements_ = set_.elements()
@@ -56,18 +52,15 @@ struct mxs_set (
         false
     ),
 
-    public
     fn elements = (
         this._elements
     ),
 
-    public
     fn size = (
         /***Returns the number of elements in the set.***/
         this._elements.count
     ),
 
-    public
     fn add element = (
         /***Add an element to a set.
         This has no effect if the element is already present.***/
@@ -75,7 +68,6 @@ struct mxs_set (
             append this._elements element
     ),
 
-    public
     fn set_elements elements_ = (
         /***Set elements from given list.
         Elements will only contain unique items afterwards.***/
@@ -84,13 +76,11 @@ struct mxs_set (
             this.add element
     ),
 
-    private
     fn _discard_by_index idx = (
         if idx != 0 do
             deleteItem this._elements idx
     ),
 
-    public
     fn discard element = (
         /***Remove an element from a set if it is a member.
         If the element is not a member, do nothing.***/
@@ -98,19 +88,16 @@ struct mxs_set (
         this._discard_by_index idx
     ),
 
-    public
     fn clear = (
         /***Remove all elements from this set.***/
         this._elements = #()
     ),
 
-    public
     fn copy = (
         /***Return a shallow copy of a set.***/
         mxs_set this._elements
     ),
 
-    public
     fn difference set_ = (
         /***Return the difference of this set and another as a new set.
         (i.e. all elements that are in this set but not the other.)***/
@@ -127,14 +114,12 @@ struct mxs_set (
         mxs_set differing
     ),
 
-    public
     fn difference_update set_ = (
         /***Remove all elements of another set from this set.***/
         local diff_set = this.difference set_
         this._elements = diff_set.elements()
     ),
 
-    public
     fn intersection set_ = (
         /***Return the intersection of this set and another as a new set.
         (i.e. elements that are common to both sets.)***/
@@ -151,21 +136,18 @@ struct mxs_set (
         mxs_set intersecting
     ),
 
-    public
     fn intersection_update set_ = (
         /***Update a set with the intersection of itself and another.***/
         local intersect_set = this.intersection set_
         this._elements = intersect_set.elements()
     ),
 
-    public
     fn isdisjoint set_ = (
         /***Return true if two sets have a null intersection.***/
         local intersect_set = this.intersection set_
         (intersect_set.elements()).count == 0
     ),
 
-    public
     fn issubset set_ = (
         /***Report whether another set contains this set.***/
         for element_1 in this.elements() do (
@@ -180,7 +162,6 @@ struct mxs_set (
         true
     ),
 
-    public
     fn issuperset set_ = (
         /***Report whether this set contains another set.***/
         for element_2 in set_.elements() do (
@@ -195,7 +176,6 @@ struct mxs_set (
         true
     ),
 
-    public
     fn pop = (
         /***Remove and return an arbitrary set element.
         Return undefined if the set is empty.***/
@@ -209,7 +189,6 @@ struct mxs_set (
         undefined
     ),
 
-    public
     fn symmetric_difference set_ = (
         /***Return the symmetric difference of two sets as a new set.
         (i.e. all elements that are in exactly one of the sets.)***/
@@ -228,7 +207,6 @@ struct mxs_set (
         mxs_set symmetric
     ),
 
-    public
     fn symmetric_difference_update set_ = (
         /***Update a set with the symmetric
         difference of itself and another.***/
@@ -236,7 +214,6 @@ struct mxs_set (
         this._elements = symmetric_set.elements()
     ),
 
-    public
     fn union set_ = (
         /***Return the union of sets as a new set.
         (i.e. all elements that are in either set.)***/
@@ -244,14 +221,12 @@ struct mxs_set (
         mxs_set united
     ),
 
-    public
     fn update set_ = (
         /***Update a set with the union of itself and another.***/
         local union_set = this.union set_
         this._elements = union_set.elements()
     ),
 
-    public
     fn update_from_array array_ = (
         /***Update a set with the union of itself and a new set
         (which is created based on the given array).***/
@@ -259,7 +234,6 @@ struct mxs_set (
         this.update set_
     ),
 
-    public
     fn to_array = (
         /***Return the set content as an array.***/
         this._elements

@@ -10,13 +10,11 @@ struct mxs_eq (
 
     ***/
 
-    public
     fn _eq_generics gen_1 gen_2 = (
         /***Wraps the builtin equality check.***/
         gen_1 == gen_2
     ),
 
-    public
     fn _eq_arrays arr_1 arr_2 = (
         /***Checks arrays for equality.
 
@@ -44,7 +42,6 @@ struct mxs_eq (
         true
     ),
 
-    public
     fn _eq_dicts dict_1 dict_2 = (
         /***Checks if dict_1 is equal to dict_2.
 
@@ -59,14 +56,12 @@ struct mxs_eq (
         this._eq_arrays items_1 items_2
     ),
 
-    public
     fn _eq_structs struct_1 struct_2 = (
         /***Checks if struct_1 is equal to struct_2 by calling its
         custom __eq__() implementation.***/
         struct_1.__eq__ struct_2
     ),
 
-    public
     fn _is_dict thing = (
         /***Checks if thing is a dictionary instance, as defined by the
         API of e.g. mxs_dict and its derivative / sibling structs.***/
@@ -77,7 +72,6 @@ struct mxs_eq (
          findString ((classOf thing) as String) "dict" != undefined )
     ),
 
-    public
     fn _is_eq_struct thing = (
         /***Checks if thing is a struct that implements the __eq__()
         method and therefore needs to be handled accordingly.***/
@@ -86,7 +80,6 @@ struct mxs_eq (
          isProperty thing "__eq__")
     ),
 
-    public
     fn isequal a b = (
         /***Checks if a is equal to b.
 

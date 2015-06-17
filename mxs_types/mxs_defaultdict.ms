@@ -23,13 +23,10 @@ struct mxs_defaultdict (
     >>> #(123, 456, 789)
 
     ***/
-    public
     default_factory,
 
-    public
     _dict = mxs_dict(),
 
-    public
     fn fromkeys keys default:undefined = (
         /***Returns a dict instance build from the
         given keys and the supplied default value.***/
@@ -40,11 +37,9 @@ struct mxs_defaultdict (
     ),
 
     -- Override the get() method while delegating all others.
-    public
     has_key = this._dict.has_key,
     has_value = this._dict.has_value,
 
-    public
     fn get key  = (
         /***Unknown keys will trigger insertion of
         the value returned by default_factory.***/
@@ -58,7 +53,6 @@ struct mxs_defaultdict (
         this._dict.get key
     ),
 
-    public
     keys = this._dict.keys,
     values = this._dict.values,
     items = this._dict.items,

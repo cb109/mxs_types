@@ -14,14 +14,12 @@ struct mxs_dict (
 
     ***/
 
-    public
     -- Do not modify directly.
     _keys = #(),
     _values = #(),
 
     -- Static methods.
 
-    public
     fn fromkeys keys default:undefined = (
         /***Returns a dict instance build from the
         given keys and the supplied default value.***/
@@ -33,7 +31,6 @@ struct mxs_dict (
 
     -- Instance methods.
 
-    public
     fn has_key key = (
         /***Returns True if the key is part
         of the dict, False otherwise.***/
@@ -41,7 +38,6 @@ struct mxs_dict (
         idx != 0
     ),
 
-    public
     fn has_value val = (
         /***Returns True if the value is part
         of the dict, False otherwise.***/
@@ -49,7 +45,6 @@ struct mxs_dict (
         idx != 0
     ),
 
-    public
     fn get key default:undefined = (
         /***Returns the value that belongs to the given key
         or the supplied default, if the key does not exist.***/
@@ -59,33 +54,28 @@ struct mxs_dict (
         default
     ),
 
-    public
     fn keys = (
         /***Returns a list of keys.***/
         this._keys
     ),
 
-    public
     fn values = (
         /***Returns a list of values.***/
         this._values
     ),
 
-    public
     fn items = (
         /***Returns a list of key-value tuples.***/
         for i = 1 to this._keys.count collect
             #(this._keys[i], this._values[i])
     ),
 
-    public
     fn size = (
         /***Returns the number of items in the dict.***/
         local items = this._items()
         items.count
     ),
 
-    public
     fn clear = (
         /***Resets the internal key and value
         arrays, thus emptying the dict.***/
@@ -93,7 +83,6 @@ struct mxs_dict (
         this._values = #()
     ),
 
-    public
     fn add key val = (
         /***Adds a new key-value pair if the key is new.
         Updates the value for the existing key otherwise.***/
@@ -107,7 +96,6 @@ struct mxs_dict (
         val
     ),
 
-    public
     fn copy = (
         /***Returns a shallow copy of this dict.
 
@@ -121,7 +109,6 @@ struct mxs_dict (
         new_dict
     ),
 
-    public
     fn pop key default: = (
         /***Returns the value for the given key,
         effectively removing this item from the dict.
@@ -144,7 +131,6 @@ struct mxs_dict (
         undefined
     ),
 
-    public
     fn popitem = (
         /***Returns a random key-value tuple from the
         dict, effectively removing this item from it.***/
@@ -158,7 +144,6 @@ struct mxs_dict (
         undefined
     ),
 
-    public
     fn update dict_ = (
         /***Updates this dict in-place with the supplied one.
 
@@ -172,7 +157,6 @@ struct mxs_dict (
             this.add input_keys[i] input_values[i]
     ),
 
-    public
     fn _sort_by item1 item2 item_index:1 reversed:False = (
         /***Used to sort by key or value
         based on the given items.***/
@@ -189,7 +173,6 @@ struct mxs_dict (
         )
     ),
 
-    public
     fn _update_arrays items = (
         /***As sorting is based on items, this function
         empties and rebuilds the _keys and _values arrays.***/
@@ -200,7 +183,6 @@ struct mxs_dict (
         )
     ),
 
-    public
     fn sort_by_key reversed:False = (
         /***In-place sorting of the dict's items based
         on the alphabet-/numer-ical order of the keys.***/
@@ -216,7 +198,6 @@ struct mxs_dict (
         )
     ),
 
-    public
     fn sort_by_value reversed:False = (
         /***In-place sorting of the dict's items based
         on the alphabet-/numer-ical order of the values.***/
